@@ -15,24 +15,25 @@ window.onload = function() {
 	document.body.appendChild( renderer.domElement );
 
 	var geo_plane = new THREE.PlaneGeometry(100, 200, 100, 200);
-	geo_plane.rotateX(Math.PI/2);
+	geo_plane.rotateX(-Math.PI/2);
+
 	var material = new THREE.ShaderMaterial({
-		vertexShader: loadShaderFromId('vertexShader'),
-		fragmentShader: loadShaderFromId('fragmentShader'),
+		vertexShader: Shaders.vertex_default,
+		fragmentShader: Shaders.fragment_default,
+		wireframe: true,
 	});
 
 	var plane = new THREE.Mesh( geo_plane, material );
 	scene.add( plane );
 
-	camera.position.y = 3;
-	camera.lookAt(new THREE.Vector3(40,0,0));
+
+	camera.position.y = 5;
+	camera.lookAt(new THREE.Vector3(20,0,0));
 
 	function render() {
 		requestAnimationFrame(render);
 		renderer.render( scene, camera );
-		plane.position.x = camera.position.x;
-		plane.position.z = camera.position.z;
-		camera.position.x += 0.1;
+		//camera.position.x += 0.1;
 	}
 	render();
 };
