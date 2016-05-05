@@ -17,7 +17,12 @@ window.onload = function() {
 	var geo_plane = new THREE.PlaneGeometry(100, 200, 100, 200);
 	geo_plane.rotateX(-Math.PI/2);
 
+	var uniforms = {
+		time: {type: "f", value: 0},
+	};
+
 	var material = new THREE.ShaderMaterial({
+		uniforms: uniforms,
 		vertexShader: Shaders.vertex_default,
 		fragmentShader: Shaders.fragment_default,
 		wireframe: true,
@@ -34,6 +39,7 @@ window.onload = function() {
 		requestAnimationFrame(render);
 		renderer.render( scene, camera );
 		//camera.position.x += 0.1;
+		uniforms.time.value += 0.1;
 	}
 	render();
 };
