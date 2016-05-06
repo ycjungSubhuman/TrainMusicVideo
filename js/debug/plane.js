@@ -15,7 +15,7 @@ window.onload = function() {
 
 	document.body.appendChild( renderer.domElement );
 
-	var geo_plane = new THREE.PlaneGeometry(100, 200, 100, 200);
+	var geo_plane = new THREE.PlaneGeometry(2000, 200, 200, 20);
 	geo_plane.rotateX(-Math.PI/2);
 
 	var uniforms = {
@@ -33,13 +33,13 @@ window.onload = function() {
 	scene.add( plane );
 
 
-	camera.position.y = 5;
+	camera.position.y = 1.0;
 	camera.lookAt(new THREE.Vector3(20,0,0));
 
 	function render() {
 		requestAnimationFrame(render);
 		renderer.render( scene, camera );
-		//camera.position.x += 0.1;
+		camera.position.x += 0.2;
 		uniforms.time.value += 0.1;
 	}
 	render();
