@@ -3,11 +3,20 @@
 		init: function () {
 			console.log('stage init');
 			//init Scene
+			TweenLite.defaultEase = Quad.easeIn;
 
 			//remove loading text
-			document.getElementsByTagName('h2')[0].remove();
+			var text = document.getElementsByTagName('h2')[0];
+			text.textContent = "Complete";
+			TweenLite.to(text, 1, {x: "2000px", opacity: "0.0", onComplete: function (){
+				text.remove();
+			} });
+
 			//remove rotating cube
-			Scene.remove(Scene.getObjectByName('cube_load'));
+			var cube = Scene.getObjectByName("cube_load").position;
+			TweenLite.to(cube, 1, {z:"10", onComplete: function () {
+				Scene.remove(cube);
+			} });
 
 			Stage.emit("done");
 		},
