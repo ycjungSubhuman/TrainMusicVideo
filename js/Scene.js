@@ -1,4 +1,4 @@
 ( function (scope) {
 	scope.Scene = new THREE.Scene();
-	Emitter(Scene);
+	Emitter(scope.Scene);
 }) (this);

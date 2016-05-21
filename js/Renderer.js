@@ -3,7 +3,7 @@
 	Renderer.setSize( window.innerWidth, window.innerHeight );
 	Renderer.setClearColor( 0x111111, 1 );
 	
-	Emitter(Renderer);
+	Emitter(scope.Renderer);
 	Renderer.on("resize", function () {
 		Renderer.setSize( window.innerWidth, window.innerHeight );
 	});

@@ -17,6 +17,8 @@
 				//init timeline. change screen. 
 				initTimeline ();
 				Bootstrap.emit("done");
+			}).catch (function (error) {
+				console.log(error.statusText);
 			});
 		},
 		done: function () {
@@ -25,7 +27,7 @@
 			Stage.emit("init");
 		}
 	};
-	Emitter(Bootstrap);
-	Bootstrap.on("init", Bootstrap.init);
-	Bootstrap.on("done", Bootstrap.done);
+	Emitter(scope.Bootstrap);
+	Bootstrap.on("init", scope.Bootstrap.init);
+	Bootstrap.on("done", scope.Bootstrap.done);
 }) (this);

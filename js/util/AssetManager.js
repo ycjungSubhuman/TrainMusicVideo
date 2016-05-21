@@ -25,16 +25,22 @@ var AssetManager = {
 		return new Promise(function (resolve, reject) {
 			//send XMLHttpRequest to retrieve data of the file
 			makeRequest ('GET', name_file)
-			.then(function (response) {
-				var type = name_file.split('.')[-1];
-
+			.then(function (responseText) {
+				var split_name = name_file.split('.');
+				var type = split_name[split_name.length-1];
 				if (type == 'midi') {
-
+					console.log("midi found but did nothing het!");
 				}
 				else if (type == 'obj') {
 					var loader = THREE.OBJLoader();
-					var obj = loader.parse(response.responseText);
-					loaded[name_file] = obj;
+					var obj = loader.parse(responseText);
+					AssetManager.loaded[name_file] = obj;
+					resolve({
+						status: this.status,
+					});
+				}
+				else if (type == 'glsl') {
+					AssetManager.loaded[name_file] = responseText;
 					resolve({
 						status: this.status,
 					});
@@ -42,6 +48,7 @@ var AssetManager = {
 				else {
 					reject({
 						status: this.status,
+						statusText: name_file + " load failed",
 					});
 				}
 			}).catch (function (err) {
