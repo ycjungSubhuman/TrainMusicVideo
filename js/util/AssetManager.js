@@ -1,9 +1,12 @@
 //after Project.js
 
-function makeRequest (method, url) {
+function makeRequest (method, url, type) {
 	return new Promise(function (resolve, reject) {
 		var req = new XMLHttpRequest();
 		req.open(method, url, true);
+		if (type === "mid") {
+			req.responseType = "arraybuffer";
+		}
 		req.onload = function () {
 			resolve (req.response);
 		}
@@ -24,23 +27,27 @@ var AssetManager = {
 	load: function (name_file) {
 		return new Promise(function (resolve, reject) {
 			//send XMLHttpRequest to retrieve data of the file
-			makeRequest ('GET', name_file)
-			.then(function (responseText) {
-				var split_name = name_file.split('.');
-				var type = split_name[split_name.length-1];
-				if (type == 'midi') {
-					console.log("midi found but did nothing het!");
+			var split_name = name_file.split('.');
+			var type = split_name[split_name.length-1];
+
+			makeRequest ('GET', name_file, type)
+			.then(function (response) {
+				if (type === 'mid') {
+					AssetManager.loaded[name_file] = new MIDIFile(response);
+					resolve({
+						status: this.status,
+					});
 				}
-				else if (type == 'obj') {
+				else if (type === 'obj') {
 					var loader = THREE.OBJLoader();
-					var obj = loader.parse(responseText);
+					var obj = loader.parse(response);
 					AssetManager.loaded[name_file] = obj;
 					resolve({
 						status: this.status,
 					});
 				}
-				else if (type == 'glsl') {
-					AssetManager.loaded[name_file] = responseText;
+				else if (type === 'glsl') {
+					AssetManager.loaded[name_file] = response;
 					resolve({
 						status: this.status,
 					});
@@ -56,6 +63,7 @@ var AssetManager = {
 				 + err.statusText + "] : " + name_file);
 				reject({
 					status: this.status,
+					statusText: err.statusText,
 				});
 			});
 		});
