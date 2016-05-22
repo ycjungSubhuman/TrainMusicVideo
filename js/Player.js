@@ -3,6 +3,7 @@
 		init: function () {
 			this.timeline = new TimelineLite ();
 			this.isPlaying = false;
+			this.timeline.stop();
 		},
 		play: function () {
 			this.timeline.time(document.getElementById('audio').currentTime);
