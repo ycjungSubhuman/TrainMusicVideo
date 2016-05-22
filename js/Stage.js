@@ -6,15 +6,15 @@
 			TweenLite.defaultEase = Quad.easeIn;
 
 			//remove loading text
-			var text = document.getElementsByTagName('h2')[0];
-			text.textContent = "Complete";
-			TweenLite.to(text, 1, {x: "2000px", opacity: "0.0", onComplete: function (){
+			var text = document.getElementsByTagName('h4')[0];
+			console.log(text);
+			TweenLite.to(text.style, 1, {left: "2000px", onComplete: function (){
 				text.remove();
 			} });
 
 			//remove rotating cube
 			var cube = Scene.getObjectByName("cube_load").position;
-			TweenLite.to(cube, 1, {z:"10", onComplete: function () {
+			TweenLite.to(cube, 1, {z:"20", onComplete: function () {
 				Scene.remove(cube);
 			} });
 

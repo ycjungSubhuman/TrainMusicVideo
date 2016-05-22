@@ -38,7 +38,7 @@ window.onload = function() {
 		uniforms.time.value += 0.1;
 	}
 	render();
-	var loading = document.createElement("h2");
+	var loading = document.createElement("h4");
 	var text = document.createTextNode("Loading...");
 	loading.appendChild(text);
 	loading.style.position = 'absolute';
