@@ -17,12 +17,24 @@
 				Scene.remove(cube);
 			} });
 
+			//touch pause start
+			window.onclick = function () {
+				if (Player.isPlaying === true)
+					Player.emit("pause");
+				else
+					Player.emit("play");
+			};
+			window.addEventListener("touchstart", function () {
+				if (Player.isPlaying === true)
+					Player.emit("pause");
+				else
+					Player.emit("play");
+			});
 			Stage.emit("done");
 		},
 		done: function () {
 			console.log('stage done');
 			//give control
-			Player.emit("play");
 
 		}
 	};
