@@ -13,7 +13,7 @@ function makeRequest (method, url, type) {
 		req.onerror = function () {
 			reject ({
 				status: this.status,
-				statusText : req.statusText,
+				statusText : url + "response couldn't be retreived",
 			});
 		}
 		req.send();
@@ -39,7 +39,7 @@ var AssetManager = {
 					});
 				}
 				else if (type === 'obj') {
-					var loader = THREE.OBJLoader();
+					var loader = new THREE.OBJLoader();
 					var obj = loader.parse(response);
 					AssetManager.loaded[name_file] = obj;
 					resolve({

@@ -7,7 +7,6 @@
 
 			//remove loading text
 			var text = document.getElementsByTagName('h4')[0];
-			console.log(text);
 			TweenLite.to(text.style, 1, {left: "2000px", onComplete: function (){
 				text.remove();
 			} });
@@ -23,6 +22,7 @@
 		done: function () {
 			console.log('stage done');
 			//give control
+			Player.emit("play");
 
 		}
 	};

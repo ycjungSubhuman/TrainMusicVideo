@@ -3,13 +3,23 @@
 	var initTimeline = function() {
 		//init timeline according to midi file
 		var midifile = Asset(Project.midi);
-		//TODO: implement timeline init
+		var events = midifile.getMidiEvents ();
+		//midi playtime is in milliseconds
+
+		_.each (events, function (event) {
+			if (event.subtype == 9) {
+				Player.timeline.add(function () {
+					console.log("boom");
+				}, event.playTime / 1000);
+			}
+		});
 	}
 
 	scope.Bootstrap = {
 		init: function () {
 			console.log('bootstrap init');
-			AssetManager.init();
+			AssetManager.init ();
+			Player.init ();
 			var list_promises = _.map(Project.assetfiles, AssetManager.load);
 
 			Promise.all(list_promises)

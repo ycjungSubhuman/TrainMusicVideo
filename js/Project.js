@@ -3,8 +3,9 @@ var Project = {
 	assetfiles: [
 		'shaders/vertex.glsl',
 		'midi/midi.mid',
+		'obj/LEGO_Man.obj',
 	],
-	midi: "",
-	bpm: 120, 
+	midi: "midi/midi.mid",
+	bpm: 113, 
 	loaded: false,
 }
