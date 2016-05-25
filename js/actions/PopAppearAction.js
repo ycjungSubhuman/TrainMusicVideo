@@ -1,7 +1,7 @@
 (function (scope) {
 	scope.PopAppearAction = class extends Action {
-		constructor (target, start, end, duration) {
-			super (target, start, end, duration);
+		constructor (target, time_start, time_end, duration) {
+			super (target, time_start, time_end, duration);
 			//TODO: implement init for this action 
 		}
 		start () {

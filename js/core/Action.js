@@ -1,28 +1,25 @@
 (function (scope) {
 	scope.Action = class {
-		constructor (target, start, end, duration) {
+		constructor (target, time_start, time_end, duration) {
 			this.target = target; //Object3D
-			this.start = start; //double
-			this.end = end; //double
+			this.time_start = time_start; //double
+			this.time_end = time_end; //double
 			this.duration = duration; //double
 			this.isActive = false;
-			Emitter(this);
+			Emitter (this);
 			this.on ("start", this.start);
 			this.on ("end", this.end);
 		}
 		start () {
-			//TODO: implement init of this action(initialized on timeline header pass)
 			this.isActive = true;
-			this.emit("update");
+			Loop.loop(this.update);
 		}
 		update () {
-			//do nothing
-			if(this.isActive) {
-				window.requestAnimationFrame(this.update);
-			}
+			//do nothing. virtual method placeholder
 		}
 		end () {
 			this.isActive = false;
+			Loop.stop(this.update);
 		}
 	};
 }) (this);
