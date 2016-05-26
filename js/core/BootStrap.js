@@ -6,12 +6,30 @@
 		var events = midifile.getMidiEvents ();
 		//midi playtime is in milliseconds
 
+		var notes = [];
+		//get all the notes
 		_.each (events, function (event) {
-			if (event.subtype == 9) {
-				Player.timeline.add(function () {
-					console.log("boom");
-				}, event.playTime / 1000);
+			// 9 is note on
+			// 8 is note off
+			// use object.delta for duration 
+			// check track
+			if (event.track == 0) { //track 0 : bassdrum
+				if (event.subtype == 9) { //note on
+					Player.timeline.add(function () {
+						//TODO: implement timeline adding for track 0 event
+						console.log("boom");
+					}, event.playTime / 1000);
+				}
 			}
+			if (event.track == 1) {
+				if (event.subtype == 9) {
+					Player.timeline.add(function () {
+						//TODO: implement timeline adding for track 1 event
+						console.log("tshack");
+					}, event.playTime / 1000);
+				}
+			}
+			//and so on...
 		});
 	}
 
