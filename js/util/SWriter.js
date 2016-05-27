@@ -6,21 +6,24 @@
 				specified time duration
 			@shot_camera : an CamAction object that specifies how the camera will handle
 				for the clip
-			@time_start : double in seconds
-			@time_duration : double in seconds
 		*/
-		addHead: function (action, shot_camera, 
-			time_start, time_duration) {
+		addCallBack: function (time, callback) {
+			Player.timeline.add(callback, time);
+		},
+		addHead: function (action, shot_camera) {
+			/* addes a clip with specified 
+			Action and Camera Shot */
+			ActionManager.addAction (action, shot_camera);
+			Player.timeline.add(function() {
+				action.emit("start");
+				shot_camera.emit("start");
+			}, action.time_start);
+		},
+		addTail: function (action, shot_camera) {
 			/* addes a clip with specified 
 			Action and Camera Shot */
 		},
-		addTail: function (action, shot_camera, 
-			time_end, time_duration) {
-			/* addes a clip with specified 
-			Action and Camera Shot */
-		},
-		addHeadTail: function (action, shot_camera, 
-			time_start, time_end) {
+		addHeadTail: function (action, shot_camera) {
 			/* addes a clip with specified 
 			Action and Camera Shot */
 		}

@@ -29,7 +29,9 @@ window.onload = function() {
 	Camera.lookAt(new THREE.Vector3(0, 0, -4.0));
 
 	function render() {
-		if (Project.loaded) return;
+		if (Project.loaded) {
+			return;
+		}
 		requestAnimationFrame(render);
 		Renderer.render( Scene, Camera );
 

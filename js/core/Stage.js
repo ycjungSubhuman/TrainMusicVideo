@@ -15,6 +15,8 @@
 			var cube = Scene.getObjectByName("cube_load").position;
 			TweenLite.to(cube, 1, {z:"20", onComplete: function () {
 				Scene.remove(cube);
+				Project.loaded = true;
+				Renderer.emit("start");
 			} });
 
 			//touch pause start

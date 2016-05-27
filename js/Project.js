@@ -2,10 +2,10 @@ var Project = {
 	//specify filenames of assets here
 	assetfiles: [
 		'shaders/vertex.glsl',
-		'midi/midi.mid',
+		'midi/untitled.mid',
 		'obj/LEGO_Man.obj',
 	],
-	midi: "midi/midi.mid",
+	midi: "midi/untitled.mid",
 	bpm: 113, 
 	loaded: false,
 }
