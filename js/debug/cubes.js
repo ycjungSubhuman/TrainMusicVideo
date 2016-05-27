@@ -68,7 +68,7 @@ window.onload = function() {
 	var cube2 = new THREE.Mesh( geo_cube, material2 );
 	var cube3 = new THREE.Points( geo_cube, material4 );
 	cube3.sortParticles = true;
-	cube2.position.x = 3;
+	cube2.position.x = 5;
 	cube3.position.y = 3;
 	scene.add( cube );
 	cube.add( cube2 );
@@ -78,15 +78,21 @@ window.onload = function() {
 	composer = new THREE.EffectComposer( renderer );
 	composer.addPass( new THREE.RenderPass( scene, camera ) );
 	
-	bokeh = new THREE.BokehPass( scene, camera );
+	bokeh = new THREE.BokehPass( scene, camera, 
+	{
+		focus : 1.5,
+		aspect : undefined,
+		aperture : undefined,
+		maxblur : undefined
+	});
 	bokeh.renderToScreen = true;
 	composer.addPass( bokeh );
 	
 	function render() {
 		requestAnimationFrame(render);
 		composer.render( scene, camera );
-		cube.rotation.x += 0.01;
-		cube.rotation.y += 0.03;
+		cube.rotation.x += 0.001;
+		cube.rotation.y += 0.003;
 		uniforms.time.value += 0.1;
 	}
 	render();
