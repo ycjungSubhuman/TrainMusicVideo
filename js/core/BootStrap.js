@@ -6,30 +6,63 @@
 		var events = midifile.getMidiEvents ();
 		//midi playtime is in milliseconds
 
+		var Note = class {
+			constructor (params) {
+				this.time_start = params.time_start;
+				this.time_end = params.time_end;
+				this.track = params.track;
+			}
+		};
 		var notes = [];
+		var createNewNote = function(event) {
+			notes.push(new Note ({
+				time_start: event.playTime / 1000,
+				track: event.track,
+			}));
+		}
+		var endNote = function(event) {
+			for (var i=notes.length-1; i>=0; i--) {
+				if(notes[i].track == event.track){
+					notes[i].time_end = event.playTime / 1000;
+					break;
+				}
+			}
+		}
 		//get all the notes
 		_.each (events, function (event) {
 			// 9 is note on
 			// 8 is note off
-			// use object.delta for duration 
-			// check track
-			if (event.track == 0) { //track 0 : bassdrum
-				if (event.subtype == 9) { //note on
-					Player.timeline.add(function () {
-						//TODO: implement timeline adding for track 0 event
-						console.log("boom");
-					}, event.playTime / 1000);
-				}
+			if (event.subtype == 9) { //note on
+				//TODO: implement timeline adding for track 0 event
+				createNewNote(event);
 			}
-			if (event.track == 1) {
-				if (event.subtype == 9) {
-					Player.timeline.add(function () {
-						//TODO: implement timeline adding for track 1 event
-						console.log("tshack");
-					}, event.playTime / 1000);
-				}
+			else if (event.subtype == 8) {
+				endNote(event);
 			}
-			//and so on...
+		});
+		//event timeline edit
+		_.each (notes, function (note) {
+			if (note.track == 2) { //boom
+				SWriter.addCallBack(note.time_start, function() {
+					ActionManager.emitEvent(4, "boom");
+				});
+			}
+			else if (note.track == 3) {
+				SWriter.addCallBack(note.time_start, function() {
+					Renderer.hue = 0xaa;
+					TweenLite.to(Renderer, 0.4, {hue: 0x00 });
+				});
+			}
+			else if (note.track == 4) {
+				var geo_cube = new THREE.CubeGeometry ( 1, 1, 1 );
+				var material = new THREE.MeshBasicMaterial ();
+				var cube = new THREE.Mesh (geo_cube, material);
+				var action = new Action (cube, note.time_start, note.time_end, note.track); //do nothing
+				var cam = new MoonShot (cube, note.time_start, note.time_end, note.track);
+				SWriter.addHead(action, cam);
+			}
+			else if (note.track == 0) { 
+			}
 		});
 	}
 

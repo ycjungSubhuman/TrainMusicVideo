@@ -3,7 +3,7 @@ window.onload = function() {
 	var camera = new THREE.PerspectiveCamera( 75, 
 		window.innerWidth / window.innerHeight,
 		0.1, 40 );
-	var renderer = new THREE.WebGLRenderer();
+	var renderer = new THREE.WebGLRenderer({preserveDrawingBuffer: true});
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	renderer.setClearColor( 0x000000, 1 );
 
@@ -80,6 +80,7 @@ window.onload = function() {
 		renderer.render( scene, camera );
 		cube.rotation.x += 0.01;
 		cube.rotation.y += 0.03;
+		cube2.rotation.x += 0.1;
 		uniforms.time.value += 0.1;
 	}
 	render();

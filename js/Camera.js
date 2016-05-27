@@ -7,5 +7,4 @@
 		Camera.aspect = window.innerWidth / window.innerHeight;
 		Camera.updateProjectionMatrix ();
 	});
-
 }) (this);
