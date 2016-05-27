@@ -71,13 +71,20 @@ window.onload = function() {
 	cube2.position.x = 3;
 	cube3.position.y = 3;
 	scene.add( cube );
-	cube.add ( cube2 );
-	cube2.add ( cube3 );
+	cube.add( cube2 );
+	cube2.add( cube3 );
 	camera.position.z = 10;
-
+	
+	composer = new THREE.EffectComposer( renderer );
+	composer.addPass( new THREE.RenderPass( scene, camera ) );
+	
+	bokeh = new THREE.BokehPass( scene, camera,  );
+	bokeh.renderToScreen = true;
+	composer.addPass( bokeh );
+	
 	function render() {
 		requestAnimationFrame(render);
-		renderer.render( scene, camera );
+		composer.render( scene, camera );
 		cube.rotation.x += 0.01;
 		cube.rotation.y += 0.03;
 		uniforms.time.value += 0.1;
