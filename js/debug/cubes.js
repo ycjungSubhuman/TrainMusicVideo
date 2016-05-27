@@ -78,7 +78,7 @@ window.onload = function() {
 	composer = new THREE.EffectComposer( renderer );
 	composer.addPass( new THREE.RenderPass( scene, camera ) );
 	
-	bokeh = new THREE.BokehPass( scene, camera,  );
+	bokeh = new THREE.BokehPass( scene, camera );
 	bokeh.renderToScreen = true;
 	composer.addPass( bokeh );
 	
