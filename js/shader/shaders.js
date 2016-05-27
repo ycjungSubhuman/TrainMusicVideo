@@ -1,10 +1,23 @@
 var Shaders = {
 	plane_vertex_default:`
 		uniform float time;
+		//uniform int moonPhase;
 		void main() {
-			gl_Position = projectionMatrix *
-			modelViewMatrix *
-			vec4(position, 1);
+			float worldTrome = time*100.0;
+			//worldTrome = worldTime + (24000 * moonPhase);
+			vec4 pos = modelViewMatrix * vec4(position, 1.0);
+			float distanceSquared = pos.x * pos.x + pos.z * pos.z;
+			pos.x += sin(distanceSquared*sin(worldTrome / (143.0 * 8.0)) / 1000.0);
+			pos.y += 8.0 * sin(distanceSquared*sin(worldTrome / (143.0 * 8.0)) / 2000.0);
+			float y = pos.y;
+			float x = pos.x;
+			float z = pos.z;	
+	
+			float om = (sin(distanceSquared*sin(worldTrome / 131072.0) / 5000.0) * sin(worldTrome / 400.0));
+			pos.y = x*sin(om) + y*cos(om);
+			pos.x = x*cos(om) - y*sin(om);
+			pos.z = z;
+			gl_Position = projectionMatrix * pos; 
 		}
 
 		`,
