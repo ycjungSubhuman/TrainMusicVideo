@@ -22,8 +22,8 @@
 				ease: Power4.easeOut,
 			});
 		}
-		update () {
-			super.update ();
+		update (self) {
+			super.update (self);
 		}
 		end () {
 			this.subject.remove (this.pivot);

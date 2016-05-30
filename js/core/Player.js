@@ -10,12 +10,14 @@
 			document.getElementById('audio').play();
 			this.timeline.play();
 			this.isPlaying = true;
+			ActionManager.emitEvent("restart");
 		},
 		pause: function () {
 			this.timeline.time(document.getElementById('audio').currentTime);
 			document.getElementById('audio').pause();
 			this.timeline.pause();
 			this.isPlaying = false;
+			ActionManager.emitEvent("pause");
 		},
 		stop: function () {
 			this.timeline.time(document.getElementById('audio').currentTime);

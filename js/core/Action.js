@@ -10,20 +10,34 @@
 			//make it an event listener
 			Emitter (this);
 			this.on ("start", this.start);
+			this.on ("restart", this.restart);
+			this.on ("pause", this.pause);
 			this.on ("end", this.end);
 		}
 		start () {
 			Scene.add(this.target);
 			this.isActive = true;
-			Loop.loop(this.update);
+
+			var self = this;
+			this.fun_update = function () {self.update(self);};
+			Loop.loop(this.fun_update);
 		}
-		update () {
+		update (self) {
 			//do nothing. virtual method placeholder
+			console.log("wow");
+		}
+		restart () {
+			if (this.isActive) {
+				Loop.loop(this.fun_update);
+			}
+		}
+		pause () {
+			Loop.stop(this.fun_update);
 		}
 		end () {
 			Scene.remove(this.target);
 			this.isActive = false;
-			Loop.stop(this.update);
+			Loop.stop(this.fun_update);
 		}
 	};
 }) (this);

@@ -19,13 +19,19 @@
 				list_cam.splice(index, 1);
 			}
 		},
-		emitEvent: function (track, name_event) {
+		emitEvent: function (name_event, track) {
 			_.each(this.list, function(action) {
-				if(action.track == track) {
+				if (!track) { //track is not given
+					action.emit(name_event);
+				}
+				else if(action.track == track) {
 					action.emit(name_event);
 				}
 			});
 			_.each(this.list_cam, function(cam) {
+				if (!track) {
+					cam.emit(name_event);
+				}
 				if(cam.track == track) {
 					cam.emit(name_event);
 				}

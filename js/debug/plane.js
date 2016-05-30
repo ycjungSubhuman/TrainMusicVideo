@@ -43,11 +43,11 @@ window.onload = function() {
 	plane1.position.x = 1000;
 	plane2.position.x = 3000;
 	
-	cube.position.x = 40;
+	cube.position.x = 300;
 	cube.position.z = 30;
 	cube.position.y = 5;
 
-	camera.position.y = 1.0;
+	camera.position.y = 7.0;
 	camera.lookAt(new THREE.Vector3(20,0,0));
 	
 	var camrespos = Math.floor(camera.position.x) % 4000;
@@ -55,8 +55,8 @@ window.onload = function() {
 	function render() {
 		requestAnimationFrame(render);
 		renderer.render( scene, camera );
-		camera.position.x += 100;
-		cube.position.x += 0.2;
+		camera.position.x += 1.6;
+		//cube.position.x += 3.2;
 		uniforms.time.value += 0.1;
 		camrespos = Math.floor(camera.position.x) % 4000;
 		if((camrespos >= 2000) && (!isplane))

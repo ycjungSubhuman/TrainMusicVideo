@@ -17,9 +17,9 @@
 			});
 			super.start ();
 		}
-		update () {
+		update (self) {
 
-			super.update ();
+			super.update (self);
 		}
 		end () {
 			Camera = this.prevcamera;

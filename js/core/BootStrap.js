@@ -44,7 +44,7 @@
 		_.each (notes, function (note) {
 			if (note.track == 2) { //boom
 				SWriter.addCallBack(note.time_start, function() {
-					ActionManager.emitEvent(4, "boom");
+					ActionManager.emitEvent("boom", 4);
 				});
 			}
 			else if (note.track == 3) {
