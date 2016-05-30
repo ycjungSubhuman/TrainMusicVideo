@@ -9,6 +9,7 @@
 			this.prevcamera = null;
 		}
 		start () {
+			this.prevcamera = Camera;
 			Camera = this.target; //change camera for this CamShot
 			Emitter(scope.Camera);
 			Camera.on("resize", function() {

@@ -16,7 +16,7 @@
 		removeCam: function (cam) {
 			var index = this.list_cam.indexOf(cam);
 			if (index > -1) {
-				list_cam.splice(index, 1);
+				this.list_cam.splice(index, 1);
 			}
 		},
 		emitEvent: function (name_event, track) {

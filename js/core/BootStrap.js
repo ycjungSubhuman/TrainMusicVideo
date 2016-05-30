@@ -44,7 +44,7 @@
 		_.each (notes, function (note) {
 			if (note.track == 2) { //boom
 				SWriter.addCallBack(note.time_start, function() {
-					ActionManager.emitEvent("boom", 4);
+					ActionManager.emitEvent("boom");
 				});
 			}
 			else if (note.track == 3) {
@@ -61,7 +61,16 @@
 				var cam = new PulsatingMoonShot (cube, note.time_start, note.time_end, note.track);
 				SWriter.addHead(action, cam);
 			}
-			else if (note.track == 0) { 
+			else if (note.track == 5) { 
+				var geo_sphere = new THREE.SphereGeometry ( 0.5, 32, 32 );
+				var material = new THREE.MeshLambertMaterial ( 0xffffff );
+				var light = new THREE.PointLight( 0x333333, 3, 100 );
+				var sphere = new THREE.Mesh (geo_sphere, material);
+				light.position.set(30, 30, 30);
+				sphere.add (light);
+				var action = new PulsateAction (sphere, note.time_start, note.time_end, note.track); //do nothing
+				var cam = new MoonShot (sphere, note.time_start, note.time_end, note.track);
+				SWriter.addHead(action, cam);
 			}
 		});
 	}

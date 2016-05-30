@@ -2,7 +2,7 @@
 	scope.MoonShot = class extends CamShot {
 		constructor (subject, time_start, time_end, track) {
 			super (subject, time_start, time_end, track);
-			this.pivot = new THREE.Object3D ();
+			this.pivot = new THREE.Object3D (); //rotation pivot
 			this.subject.add (this.pivot);
 			this.pivot.add(this.target);
 			this.target.position.z = 5;

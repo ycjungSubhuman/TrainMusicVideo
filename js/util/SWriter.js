@@ -18,6 +18,12 @@
 				action.emit("start");
 				shot_camera.emit("start");
 			}, action.time_start);
+			Player.timeline.add(function () {
+				action.emit("end");
+				shot_camera.emit("end");
+				ActionManager.removeAction (action);
+				ActionManager.removeCam (shot_camera);
+			}, action.time_end);
 		},
 		addTail: function (action, shot_camera) {
 			/* addes a clip with specified 
