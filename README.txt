@@ -22,6 +22,8 @@ boom은 박자에 따라 호출되는 함수입니다.
 end는 장면이 끝날 때 호출되는 함수입니다.
 
 Action의 target은 현재 이 액션이 주목하고 있는 Object3D를 나타냅니다. 
+한 Action이 여러 물체로 이루어져 있을 경우 하나의 계층구조를 만들어 그 구조의 root를 target으로 설정해주세요.(constructor의 첫번째 인자)
+
 CamShot의 target은 현재 이 샷이 주목하고 있는 Camera를 나타냅니다. 
 CamShot의 subject는 현재 이 샷의 카메라가 붙어있는 Object3D 대상을 말합니다. 
 
@@ -41,6 +43,7 @@ index.html에서 js/CamShot.js를 불러온 줄 바로 뒤에서 새로 만든 j
 BootStrap.js에서 44~74번째 줄에 보면 노트에 따라 타임라인에 액션과 카메라를 추가하는 코드가 있습니다.
 여기에서 현재 60, 61, 71, 72번째 줄을 보면 어떤 오브젝트 (육면체, 구)에 대한 Action과 CamShot을 새로 만드는 부분이
 있습니다. 여기를 자신이 만든 Action이나 CamShot으로 바꿔서 테스트합니다.
+사용되는 target을 다른 것으로 바꾸고 싶다면 THREE js 문서를 참조하시면서 현재 있는 큐브와 구 대신에 새로운 물체를 만들어도 됩니다.
 
 
 * 테스트 환경
