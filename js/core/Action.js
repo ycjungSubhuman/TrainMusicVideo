@@ -24,7 +24,6 @@
 		}
 		update (self) {
 			//do nothing. virtual method placeholder
-			console.log("wow");
 		}
 		restart () {
 			if (this.isActive) {

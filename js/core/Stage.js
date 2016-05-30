@@ -12,8 +12,8 @@
 			} });
 
 			//remove rotating cube
-			var cube = Scene.getObjectByName("cube_load").position;
-			TweenLite.to(cube, 1, {z:"20", onComplete: function () {
+			var cube = Scene.getObjectByName("cube_load");
+			TweenLite.to(cube.position, 1, {z:"20", onComplete: function () {
 				Scene.remove(cube);
 				Project.loaded = true;
 				Renderer.emit("start");

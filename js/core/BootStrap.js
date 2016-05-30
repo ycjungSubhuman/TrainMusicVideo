@@ -58,7 +58,7 @@
 				var material = new THREE.MeshBasicMaterial ();
 				var cube = new THREE.Mesh (geo_cube, material);
 				var action = new Action (cube, note.time_start, note.time_end, note.track); //do nothing
-				var cam = new MoonShot (cube, note.time_start, note.time_end, note.track);
+				var cam = new PulsatingMoonShot (cube, note.time_start, note.time_end, note.track);
 				SWriter.addHead(action, cam);
 			}
 			else if (note.track == 0) { 
