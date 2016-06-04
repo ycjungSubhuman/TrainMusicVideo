@@ -62,7 +62,7 @@
 				SWriter.addHead(action, cam);*/
 				var target = new THREE.Object3D ();
 				var action = new DotsAction (target, note.time_start, note.time_end, note.track);
-				var cam = new PulsatingMoonShot (target, note.time_start, note.time_end, note.track);
+				var cam = new SmoothSweepShot (target, note.time_start, note.time_end, note.track);
 				SWriter.addHead(action);
 				SWriter.addHead(cam);
 			}

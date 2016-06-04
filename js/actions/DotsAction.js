@@ -62,7 +62,7 @@
 				for (var j=0; j<size_sample; j++) {
 					sum += freqdata[i*size_sample + j];
 				}
-				self.materials[i].size = Math.pow((sum / size_sample) / 128, 2);
+				self.materials[i].size = Math.pow((sum / size_sample) / 256, 1);
 			}
 			super.update(self);
 		}
