@@ -19,8 +19,9 @@
 				geometry.vertices.push(vertex);
 			}
 			//generate materials and add cloud to the scene
+			var materials = [];
 			for (var i=0; i<params.length; i++) {
-				var mat_point = new THREE.PointsMaterial({
+				materials[i] = new THREE.PointsMaterial({
 					color: params[i][0],
 					map: Asset('textures/circle.png'),
 					transparent: true,
@@ -32,7 +33,7 @@
 					depthWrite: false,
 					blending: THREE.AdditiveBlending,
 				});
-				var cloud = new THREE.Points( geometry, mat_point );
+				var cloud = new THREE.Points( geometry, materials[i] );
 				cloud.rotation.x = Math.random() * 6;
 				cloud.rotation.y= Math.random() * 6;
 				cloud.rotation.z = Math.random() * 6;
@@ -40,6 +41,7 @@
 			}
 			super (target, time_start, time_end, track);
 			this.params = params;
+			this.materials = materials;
 		}
 		start () {
 			//TODO: popappear render init
@@ -53,13 +55,15 @@
 		}
 		update (self) {
 			var freqdata = Analyser.getFreqData();
-			var means = []; //means of freq data
 			var size_sample = Math.floor(freqdata.length / self.params.length);
 
 			for (var i=0; i<self.params.length; i++) {
-				//means[i] = 
+				var sum = 0;
+				for (var j=0; j<size_sample; j++) {
+					sum += freqdata[i*size_sample + j];
+				}
+				self.materials[i].size = Math.pow((sum / size_sample) / 128, 2);
 			}
-
 			super.update(self);
 		}
 		end () {
