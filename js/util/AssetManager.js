@@ -7,6 +7,9 @@ function makeRequest (method, url, type) {
 		if (type === "mid") {
 			req.responseType = "arraybuffer";
 		}
+		else if (type === "png") {
+			req.responseType = "blob";
+		}
 		req.onload = function () {
 			resolve (req.response);
 		}
@@ -48,6 +51,20 @@ var AssetManager = {
 				}
 				else if (type === 'glsl') {
 					AssetManager.loaded[name_file] = response;
+					resolve({
+						status: this.status,
+					});
+				}
+				else if (type === 'png') {
+					var blob = new Blob([response], {type:'image/png'});
+					var img = document.createElement('img');
+					img.onload = function(e) {
+					    window.URL.revokeObjectURL(img.src); // Clean up after yourself.
+					};
+					img.src = window.URL.createObjectURL(blob);
+					document.body.appendChild(img);
+
+					AssetManager.loaded[name_file] = img;
 					resolve({
 						status: this.status,
 					});

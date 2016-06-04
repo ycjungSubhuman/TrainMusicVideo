@@ -54,11 +54,15 @@
 				});
 			}
 			else if (note.track == 4) {
-				var geo_cube = new THREE.CubeGeometry ( 1, 1, 1 );
+				/*var geo_cube = new THREE.CubeGeometry ( 1, 1, 1 );
 				var material = new THREE.MeshBasicMaterial ();
 				var cube = new THREE.Mesh (geo_cube, material);
 				var action = new Action (cube, note.time_start, note.time_end, note.track); //do nothing
 				var cam = new PulsatingMoonShot (cube, note.time_start, note.time_end, note.track);
+				SWriter.addHead(action, cam);*/
+				var target = new THREE.Object3D ();
+				var action = new DotsAction (target, note.time_start, note.time_end, note.track);
+				var cam = new PulsatingMoonShot (target, note.time_start, note.time_end, note.track);
 				SWriter.addHead(action, cam);
 			}
 			else if (note.track == 5) { 

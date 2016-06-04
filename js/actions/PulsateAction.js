@@ -3,10 +3,10 @@
 		constructor (target, time_start, time_end, track) {
 			super (target, time_start, time_end, track);
 			//TODO: implement init for this action 
-			this.on("boom", this.boom);
 		}
 		start () {
 			//TODO: popappear render init
+			this.on("boom", this.boom);
 			super.start ();
 		}
 		boom () {

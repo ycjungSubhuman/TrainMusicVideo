@@ -6,9 +6,9 @@
 			this.subject.add (this.pivot);
 			this.pivot.add(this.target);
 			this.target.position.z = 5;
-			this.on ("boom", this.boom);
 		}
 		start () {
+			this.on ("boom", this.boom);
 			super.start ();
 		}
 		boom () {
