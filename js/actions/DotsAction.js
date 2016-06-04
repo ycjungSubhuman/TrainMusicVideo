@@ -2,9 +2,11 @@
 	scope.DotsAction = class extends Action {
 		constructor (target, time_start, time_end, track) {
 			var geo_plane = new THREE.PlaneGeometry( 10, 10, 10, 10 );
+			var loader = new THREE.TextureLoader ();
+			var texture = loader.load('textures/circle.png');
 			var mat_point = new THREE.PointsMaterial({
 				color: 0xffffff,
-				//map: Asset('textures/circle.png'),
+				map: texture,
 				transparent: true,
 				opacity: 1,
 				alphaTest: 0.5,
@@ -14,7 +16,6 @@
 			});
 			var plane = new THREE.Points( geo_plane, mat_point );
 			target.add (plane);
-			console.log (plane);
 			super (target, time_start, time_end, track);
 		}
 		start () {

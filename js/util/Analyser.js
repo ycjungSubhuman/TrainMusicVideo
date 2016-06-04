@@ -17,8 +17,10 @@
 		},
 		update: function (self) {
 			self.analyser.getByteFrequencyData(self.frequencyData);
-			console.log(self.frequencyData);
 		},
+		getFreq: function () {
+			return this.frequencyData();
+		}
 	}
 	Analyser.init();
 }) (this);

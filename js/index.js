@@ -15,8 +15,8 @@ window.onload = function() {
 
 	var material = new THREE.ShaderMaterial({
 		uniforms: uniforms,
-		vertexShader: Shaders.vertex_default,
-		fragmentShader: Shaders.fragment_default,
+		vertexShader: Shaders.plane_vertex_default,
+		fragmentShader: Shaders.plane_fragment_default,
 	});
 
 	var cube = new THREE.Mesh( geometry, material );
