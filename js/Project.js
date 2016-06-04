@@ -4,6 +4,7 @@ var Project = {
 		'shaders/vertex.glsl',
 		'midi/untitled.mid',
 		'obj/LEGO_Man.obj',
+		'textures/circle.png',
 	],
 	midi: "midi/untitled.mid",
 	bpm: 113, 

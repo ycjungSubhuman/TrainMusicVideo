@@ -52,6 +52,14 @@ var AssetManager = {
 						status: this.status,
 					});
 				}
+				else if (type === 'png') {
+					var loader = new THREE.TextureLoader ();
+					var texture = loader.load(name_file);
+					AssetManager.loaded[name_file] = texture;
+					resolve({
+						status: this.status,
+					});
+				}
 				else {
 					reject({
 						status: this.status,
