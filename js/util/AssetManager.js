@@ -7,6 +7,9 @@ function makeRequest (method, url, type) {
 		if (type === "mid") {
 			req.responseType = "arraybuffer";
 		}
+		if (type === 'png') {
+			resolve (null);
+		}
 		req.onload = function () {
 			resolve (req.response);
 		}
@@ -42,6 +45,14 @@ var AssetManager = {
 					var loader = new THREE.OBJLoader();
 					var obj = loader.parse(response);
 					AssetManager.loaded[name_file] = obj;
+					resolve({
+						status: this.status,
+					});
+				}
+				else if (type === 'mtl') {
+					var loader = new THREE.MTLLoader();
+					var mat = loader.parse(response);
+					AssetManager.loaded[name_file] = mat;
 					resolve({
 						status: this.status,
 					});

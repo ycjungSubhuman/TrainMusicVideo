@@ -63,7 +63,8 @@
 				var target = new THREE.Object3D ();
 				var action = new DotsAction (target, note.time_start, note.time_end, note.track);
 				var cam = new PulsatingMoonShot (target, note.time_start, note.time_end, note.track);
-				SWriter.addHead(action, cam);
+				SWriter.addHead(action);
+				SWriter.addHead(cam);
 			}
 			else if (note.track == 5) { 
 				var geo_sphere = new THREE.SphereGeometry ( 0.5, 32, 32 );
@@ -74,7 +75,8 @@
 				sphere.add (light);
 				var action = new PulsateAction (sphere, note.time_start, note.time_end, note.track); //do nothing
 				var cam = new MoonShot (sphere, note.time_start, note.time_end, note.track);
-				SWriter.addHead(action, cam);
+				SWriter.addHead(action);
+				SWriter.addHead(cam);
 			}
 		});
 	}

@@ -4,11 +4,11 @@
 			//reference : https://github.com/mrdoob/three.js/blob/master/examples/webgl_points_sprites.html
 			//generate a random geometry
 			var params = [ //pairs of color * size
-				[0x68522d, 0.5],
-				[0x738655, 0.5],
-				[0x7fb1ac, 0.5],
-				[0x977c57, 0.5],
-				[0xe6d3b9, 0.5],
+				[0x68522d, 0],
+				[0x738655, 0],
+				[0x7fb1ac, 0],
+				[0x977c57, 0],
+				[0xe6d3b9, 0],
 			];
 			var geometry = new THREE.Geometry ();
 			for (var i=0; i<80; i++) {
