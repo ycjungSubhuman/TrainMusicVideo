@@ -54,6 +54,19 @@ var Shaders = {
 		}
 
 		`,
+	vd: `
+		void main() {
+			gl_Position = projectionMatrix *
+			modelViewMatrix *
+			vec4(position, 1);
+		}
+	`,
+	fd: `
+		uniform Sampler2D map;
+		void main() {
+			gl_FragColor = texture (map, uV);
+		}
+	`,
 	cubes_fragment_default:`
 		uniform float time;
 		void main() {

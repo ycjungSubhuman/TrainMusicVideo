@@ -62,21 +62,16 @@
 				SWriter.addHead(action, cam);*/
 				var target = new THREE.Object3D ();
 				var action = new DotsAction (target, note.time_start, note.time_end, note.track);
-				var cam = new PulsatingMoonShot (target, note.time_start, note.time_end, note.track);
-				
-				SWriter.addHead(action, cam);
+				var cam = new SmoothSweepShot (target, note.time_start, note.time_end, note.track);
+				SWriter.addHead(action);
+				SWriter.addHead(cam);
 			}
 			else if (note.track == 5) { 
 				var target = new THREE.Object3D ();
-
-				//var action = new PulsateAction (sphere, note.time_start, note.time_end, note.track); //do nothing
-				//var cam = new MoonShot (sphere, note.time_start, note.time_end, note.track);
-				
-				//var action = new CarSceneAction (target, note.time_start, note.time_end, note.track); //do nothing
-				//var cam = new CarSceneShot (target, note.time_start, note.time_end, note.track);
-				var action = new CarSceneAction (target, note.time_start, 1000000, note.track); //do nothing
-				var cam = new CarSceneShot (target, note.time_start, 1000000, note.track);
-				SWriter.addHead(action, cam);
+				var action = new CarSceneAction (target, note.time_start, note.time_end, note.track); //do nothing
+				var cam = new CarSceneShot (target, note.time_start, note.time_end, note.track);
+				SWriter.addHead(action);
+				SWriter.addHead(cam);
 			}
 		});
 	}
@@ -86,7 +81,9 @@
 			console.log('bootstrap init');
 			AssetManager.init ();
 			Player.init ();
+			THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
 			var list_promises = _.map(Project.assetfiles, AssetManager.load);
+			list_promises.concat(_.map(Project.modelfiles, AssetManager.loadmodel));
 
 			Promise.all(list_promises)
 			.then (function (vals) {

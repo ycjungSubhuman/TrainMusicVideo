@@ -4,11 +4,11 @@
 			//reference : https://github.com/mrdoob/three.js/blob/master/examples/webgl_points_sprites.html
 			//generate a random geometry
 			var params = [ //pairs of color * size
-				[0x68522d, 0.5],
-				[0x738655, 0.5],
-				[0x7fb1ac, 0.5],
-				[0x977c57, 0.5],
-				[0xe6d3b9, 0.5],
+				[0x68522d, 0],
+				[0x738655, 0],
+				[0x7fb1ac, 0],
+				[0x977c57, 0],
+				[0xe6d3b9, 0],
 			];
 			var geometry = new THREE.Geometry ();
 			for (var i=0; i<80; i++) {
@@ -19,8 +19,9 @@
 				geometry.vertices.push(vertex);
 			}
 			//generate materials and add cloud to the scene
+			var materials = [];
 			for (var i=0; i<params.length; i++) {
-				var mat_point = new THREE.PointsMaterial({
+				materials[i] = new THREE.PointsMaterial({
 					color: params[i][0],
 					map: Asset('textures/circle.png'),
 					transparent: true,
@@ -32,7 +33,7 @@
 					depthWrite: false,
 					blending: THREE.AdditiveBlending,
 				});
-				var cloud = new THREE.Points( geometry, mat_point );
+				var cloud = new THREE.Points( geometry, materials[i] );
 				cloud.rotation.x = Math.random() * 6;
 				cloud.rotation.y= Math.random() * 6;
 				cloud.rotation.z = Math.random() * 6;
@@ -40,6 +41,7 @@
 			}
 			super (target, time_start, time_end, track);
 			this.params = params;
+			this.materials = materials;
 		}
 		start () {
 			//TODO: popappear render init
@@ -53,14 +55,16 @@
 		}
 		update (self) {
 			var freqdata = Analyser.getFreqData();
-			var means = []; //means of freq data
 			var size_sample = Math.floor(freqdata.length / self.params.length);
 			
 
 			for (var i=0; i<self.params.length; i++) {
-				//means[i] = 
+				var sum = 0;
+				for (var j=0; j<size_sample; j++) {
+					sum += freqdata[i*size_sample + j];
+				}
+				self.materials[i].size = Math.pow((sum / size_sample) / 256, 1);
 			}
-
 			super.update(self);
 		}
 		end () {
