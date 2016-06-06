@@ -16,7 +16,6 @@
 		}
 		boom () {
 			this.target.scale.set(1, 1, 1);
-			console.log(this.fish);
 			TweenLite.to(this.target.scale, 0.5, {
 				x: 0.8,
 				y: 0.8,
