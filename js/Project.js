@@ -5,6 +5,7 @@ var Project = {
 		'midi/untitled.mid',
 		'obj/LEGO_Man.obj',
 		'textures/circle.png',
+		'textures/aspalt.png',
 	],
 	midi: "midi/untitled.mid",
 	bpm: 113, 

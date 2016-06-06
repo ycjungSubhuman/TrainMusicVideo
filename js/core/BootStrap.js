@@ -63,17 +63,19 @@
 				var target = new THREE.Object3D ();
 				var action = new DotsAction (target, note.time_start, note.time_end, note.track);
 				var cam = new PulsatingMoonShot (target, note.time_start, note.time_end, note.track);
+				
 				SWriter.addHead(action, cam);
 			}
 			else if (note.track == 5) { 
-				var geo_sphere = new THREE.SphereGeometry ( 0.5, 32, 32 );
-				var material = new THREE.MeshLambertMaterial ( 0xffffff );
-				var light = new THREE.PointLight( 0x333333, 3, 100 );
-				var sphere = new THREE.Mesh (geo_sphere, material);
-				light.position.set(30, 30, 30);
-				sphere.add (light);
-				var action = new PulsateAction (sphere, note.time_start, note.time_end, note.track); //do nothing
-				var cam = new MoonShot (sphere, note.time_start, note.time_end, note.track);
+				var target = new THREE.Object3D ();
+
+				//var action = new PulsateAction (sphere, note.time_start, note.time_end, note.track); //do nothing
+				//var cam = new MoonShot (sphere, note.time_start, note.time_end, note.track);
+				
+				//var action = new CarSceneAction (target, note.time_start, note.time_end, note.track); //do nothing
+				//var cam = new CarSceneShot (target, note.time_start, note.time_end, note.track);
+				var action = new CarSceneAction (target, note.time_start, 1000000, note.track); //do nothing
+				var cam = new CarSceneShot (target, note.time_start, 1000000, note.track);
 				SWriter.addHead(action, cam);
 			}
 		});

@@ -55,6 +55,7 @@
 			var freqdata = Analyser.getFreqData();
 			var means = []; //means of freq data
 			var size_sample = Math.floor(freqdata.length / self.params.length);
+			
 
 			for (var i=0; i<self.params.length; i++) {
 				//means[i] = 
