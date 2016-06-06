@@ -32,6 +32,27 @@
 				else
 					Player.emit("play");
 			});
+			document.delta_x = 0;
+			document.delta_y = 0;
+			document.tar_x = 0;
+			document.tar_y = 0;
+
+			//camera control
+			document.addEventListener('mousemove', function (event) {
+				document.tar_x = (event.clientX - window.innerWidth / 2) / window.innerWidth * 2;
+				document.tar_y = ((-event.clientY) + window.innerHeight / 2) / window.innerHeight * 2;
+			});
+			Loop.loop(function () {
+				document.delta_x = document.delta_x + (document.tar_x - document.delta_x) * 0.03;
+				document.delta_y = document.delta_y + (document.tar_y - document.delta_y) * 0.03;
+				var pos_cam = Camera.getWorldPosition();
+				var dir_look = Camera.direction.normalize();
+				var dir_y = (new THREE.Vector3 (0, 1, 0)).normalize();
+				var dir_x = dir_look.clone().cross(dir_y);
+				var dir_new = dir_look.clone().add(dir_x.clone().multiplyScalar(document.delta_x)).add(dir_y.clone().multiplyScalar(document.delta_y)).normalize();
+				Camera.dir_eye = dir_new;
+				Camera.lookAt(Camera.dir_eye);
+			});
 			Stage.emit("done");
 		},
 		done: function () {
