@@ -3,8 +3,10 @@ var Project = {
 	assetfiles: [
 		'shaders/vertex.glsl',
 		'midi/untitled.mid',
-		'obj/LEGO_Man.obj',
 		'textures/circle.png',
+	],
+	modelfiles: [
+		['goldfish', 'obj/Goldfish/GOLDFISH.obj', 'obj/Goldfish/GOLDFISH.mtl'],
 	],
 	midi: "midi/untitled.mid",
 	bpm: 113, 
