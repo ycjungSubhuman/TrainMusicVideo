@@ -8,8 +8,7 @@
 			geo_plane.rotateX(-Math.PI/2);
 			
 			var aspalt = Asset('textures/aspalt.png');
-			aspalt.repeat.set( 8, 8 );
-			
+
             this.uniforms1 = {
         		time: {type: "f", value: 0},
 				istextured: {type: "b", value: true},
@@ -55,7 +54,7 @@
 				this.plane2.add(roadline2);
 			}
 			
-			for(var i=0; i<50; i++)
+			/*for(var i=0; i<50; i++)
 			{
 				var bu1 = Asset('building1');
 				var bu2 = Asset('building2');
@@ -65,7 +64,7 @@
 				bu2.position.x = i*40 - 980;
 				this.plane1.add(bu1);
 				this.plane2.add(bu2);
-			}
+			}*/
 			
             this.camrespos = Math.floor(Camera.position.x) % 4000;
 			

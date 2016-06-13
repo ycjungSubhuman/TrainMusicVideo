@@ -5,6 +5,8 @@ var Project = {
 		'midi/untitled.mid',
 		'textures/circle.png',
 		'textures/aspalt.png',
+		'textures/aspalt2.png',
+		'textures/lensflare0.png',
 	],
 	modelfiles: [
 		['deer', 'obj/Deer/deer.obj', 'obj/Deer/deer.mtl'],
