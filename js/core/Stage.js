@@ -61,8 +61,8 @@
 				Player.timeline.time(Player.timeline.time()+delta);
 			});
 
-
-
+			//uniform time 
+			document.time = 0;
 			Stage.emit("done");
 		},
 		done: function () {
