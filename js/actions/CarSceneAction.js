@@ -115,7 +115,7 @@
 
 			this.nightbd = Asset('nightbuilding').clone();
 			this.nightbd.children[0].material = material4;
-			this.nightbd.rotation.y = Math.PI/2;
+			
 
 			this.stlamp = Asset('streetlamp').clone();
 			this.stlamp.children[0].material = material5;
@@ -196,7 +196,7 @@
 				this.queue2.push(bu2);
 				this.isboom = true;
 
-				this.Bassdrum_add();
+				//this.Bassdrum_add();
 			}
 		}
 		Tschack_add (){
@@ -224,16 +224,17 @@
 			this.isboom = false;
 		}
 		Bassdrum_add(){
-			var lamp1 = this.stlamp.clone();
+			//var lamp1 = this.stlamp.clone();
+			var lamp1 = this.nightbd.clone();
 			var lamp2 = this.stlamp.clone();
 			console.log("bd:"+lamp1);
-			lamp1.scale.copy(new THREE.Vector3(100.0 / 19.0, 100.0/47.0, 22.0));
+			//lamp1.scale.copy(new THREE.Vector3(100.0 / 19.0, 100.0/47.0, 22.0));
 			lamp1.position.z = Camera.position.z + 49.6*4.0*6.0;
-			lamp1.position.x = 50;
+			lamp1.position.x = 0;
 			lamp1.position.y = 23;
 			console.log("bd::"+lamp1.position.z);
 			lamp2.position.z = Camera.position.z + 49.6*4.0*6.0;
-			lamp2.position.x = -50;
+			lamp2.position.x = 400;
 			lamp2.position.y = 23;
 			this.tmp.add(lamp1);
 			this.tmp.add(lamp2);
