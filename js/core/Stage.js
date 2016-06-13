@@ -52,9 +52,7 @@
 				var dir_new = dir_look.clone().add(dir_x.clone().multiplyScalar(document.delta_x)).add(dir_y.clone().multiplyScalar(document.delta_y)).normalize();
 				Camera.dir_eye = dir_new;
 				Camera.dir_eye.x = -dir_new.x;
-				Camera.lookAt(Camera.dir_eye);
-				console.log("wowo", Camera.dir_eye);
-				console.log("hoho", Camera.getWorldDirection());
+				Camera.lookAt(pos_cam.clone().add(Camera.dir_eye));
 			});
 			Stage.emit("done");
 		},
