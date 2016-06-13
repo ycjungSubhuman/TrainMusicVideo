@@ -61,8 +61,8 @@
 				var cam = new PulsatingMoonShot (cube, note.time_start, note.time_end, note.track);
 				SWriter.addHead(action, cam);*/
 				var target = new THREE.Object3D ();
-				var action = new DotsAction (target, note.time_start, note.time_end, note.track);
-				var cam = new SmoothSweepShot (target, note.time_start, note.time_end, note.track);
+				var action = new DeerAction (target, note.time_start, note.time_end, note.track);
+				var cam = new DeerShot (target, note.time_start, note.time_end, note.track);
 				SWriter.addHead(action);
 				SWriter.addHead(cam);
 			}
@@ -83,7 +83,7 @@
 			Player.init ();
 			THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
 			var list_promises = _.map(Project.assetfiles, AssetManager.load);
-			list_promises.concat(_.map(Project.modelfiles, AssetManager.loadmodel));
+			list_promises = list_promises.concat(_.map(Project.modelfiles, AssetManager.loadmodel));
 
 			Promise.all(list_promises)
 			.then (function (vals) {

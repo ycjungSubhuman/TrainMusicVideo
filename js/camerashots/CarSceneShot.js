@@ -9,6 +9,7 @@
 			this.target.position.y = 10;
 			this.target.near = 0.1;
 			this.target.far = 200;
+			this.target.direction = new THREE.Vector3(1,0,0);
 			this.target.updateProjectionMatrix ();
 		}
 		start () {
@@ -26,7 +27,6 @@
 		update (self) {
 			//rotate camera around the object
 			this.target.position.x += 1.6 
-			Camera.direction = new THREE.Vector3(-1,0,0);
 			
 			super.update (self);
 		}

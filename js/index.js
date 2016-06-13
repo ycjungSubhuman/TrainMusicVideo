@@ -1,6 +1,7 @@
 window.onresize = function () {
 	Camera.emit("resize");
 	Renderer.emit("resize");
+	console.log('resized');
 }
 
 window.onload = function() {
@@ -17,6 +18,7 @@ window.onload = function() {
 
 	var cube = new THREE.Mesh( geometry, material );
 	cube.name = "cube_load";
+	cube.position.x = -2;
 	Scene.add( cube );
 
 

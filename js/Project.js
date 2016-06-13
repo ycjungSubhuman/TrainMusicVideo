@@ -7,9 +7,9 @@ var Project = {
 		'textures/aspalt.png',
 	],
 	modelfiles: [
+		['deer', 'obj/Deer/deer.obj', 'obj/Deer/deer.mtl'],
 		['goldfish', 'obj/Goldfish/GOLDFISH.obj', 'obj/Goldfish/GOLDFISH.mtl'],
-		['building1', 'obj/building1/bina2.obj', 'obj/building1/bina2.mtl'],
-		['building2', 'obj/building2/bina.obj', 'obj/building2/bina.mtl'],
+		['taxi', 'obj/LP670/lp670.obj', 'obj/LP670/lp670.mtl'],
 	],
 	midi: "midi/untitled.mid",
 	bpm: 113, 
