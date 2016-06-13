@@ -44,7 +44,7 @@ THREE.BokehShader = {
 		"pentagon": { type: "i", value: 0 },
 
 		"shaderFocus":  { type: "i", value: 1 },
-		"focusCoords":  { type: "v2", value: new THREE.Vector2() },
+		"focusCoords":  { type: "v2", value: new THREE.Vector2(0.5, 0.5) },
 
 
 	},
@@ -88,8 +88,8 @@ THREE.BokehShader = {
 		"//------------------------------------------",
 		"//user variables",
 
-		"const int samples = SAMPLES; //samples on the first ring",
-		"const int rings = RINGS; //ring count",
+		"const int samples = 6; //samples on the first ring",
+		"const int rings = 4; //ring count",
 
 		"const int maxringsamples = rings * samples;",
 
