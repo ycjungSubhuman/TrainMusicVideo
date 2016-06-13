@@ -49,11 +49,13 @@ var AssetManager = {
 				}
 				else if (type === 'png') {
 					var loader = new THREE.TextureLoader ();
-					var texture = loader.load(name_file);
-					AssetManager.loaded[name_file] = texture;
-					resolve({
-						status: this.status,
+					loader.load(name_file, function(tex) {
+						AssetManager.loaded[name_file] = tex;
+						resolve({
+							status: this.status,
+						});
 					});
+					
 				}
 				else {
 					reject({

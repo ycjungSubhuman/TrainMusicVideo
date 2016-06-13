@@ -4,7 +4,7 @@ var Project = {
 		'shaders/vertex.glsl',
 		'midi/untitled.mid',
 		'textures/circle.png',
-		'textures/aspalt.png',
+		//'textures/aspalt.png',
 	],
 	modelfiles: [
 		['goldfish', 'obj/Goldfish/GOLDFISH.obj', 'obj/Goldfish/GOLDFISH.mtl'],
