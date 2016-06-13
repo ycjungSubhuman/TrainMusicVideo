@@ -1,5 +1,5 @@
 (function (scope) {
-	scope.PulsatingMoonShot = class extends CamShot {
+	scope.FishNeedleShot = class extends CamShot {
 		constructor (subject, time_start, time_end, track) {
 			super (subject, time_start, time_end, track);
 			this.pivot = new THREE.Object3D (); //rotation pivot

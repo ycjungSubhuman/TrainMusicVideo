@@ -47,7 +47,7 @@
 			//TODO: popappear render init
 			//bind 'boom' event
 			this.on("boom", this.boom);
-			this.target.direction = new Vector3(1, 0 ,0);
+			this.target.direction = new THREE.Vector3(1, 0 ,0);
 
 			super.start ();
 		}
