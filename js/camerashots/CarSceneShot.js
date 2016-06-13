@@ -8,15 +8,15 @@
 			this.target.position.z = 0;
 			this.target.position.y = 10;
 			this.target.near = 0.1;
-			this.target.far = 800;
-			this.target.updateProjectionMatrix ();
+			this.target.far = 1200;
+			this.target.updateProjectionMatrix (); 
 		}
 		start () {
 			this.on ("boom", this.boom);
 			super.start ();
 		}
 		boom () {
-			console.log("boom");
+			//console.log("boom : " + this.target.position.z);
 			if(this.tween) this.tween.kill();
 			this.tween = TweenLite.to(this.pivot.rotation, 1, {
 				z: this.pivot.rotation.z+1.2,
@@ -25,7 +25,7 @@
 		}
 		update (self) {
 			//rotate camera around the object
-			this.target.position.z += 1.6 
+			this.target.position.z += 6.4; 
 			Camera.direction = new THREE.Vector3(0,0,1);
 			
 			super.update (self);

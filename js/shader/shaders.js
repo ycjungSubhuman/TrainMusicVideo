@@ -7,7 +7,7 @@ var Shaders = {
 		void main() {
 			uVu = uv;
 			
-			float worldTrome = time*64.0;
+			float worldTrome = time*62.0;
 			//worldTrome = worldTime + (24000 * moonPhase);
 			vec4 pos = modelViewMatrix * vec4(position, 1.0);
 			float distanceSquared = pos.x * pos.x + pos.z * pos.z;
@@ -18,8 +18,8 @@ var Shaders = {
 			float z = pos.z;
 	
 			float om = (sin(distanceSquared*sin(worldTrome / 131072.0) / 5000.0) * sin(worldTrome / 400.0));
-			pos.y = x*sin(om) + y*cos(om);
-			pos.x = 0.8 * (x*cos(om) - y*sin(om));
+			pos.y = 0.8 * (x*sin(om) + y*cos(om));
+			pos.x = (x*cos(om) - y*sin(om));
 			pos.z = z;
 			gl_Position = projectionMatrix * pos; 
 		}
@@ -30,7 +30,7 @@ var Shaders = {
 		uniform sampler2D tex;
 		uniform bool istextured;
 		uniform float texrepeat;
-
+		uniform vec4 color;
 		varying vec2 uVu;
 		void main() {
 			if(istextured)
@@ -39,9 +39,7 @@ var Shaders = {
 			}
 			else
 			{
-				//gl_FragColor = vec4(sin(time), sin(time/4.0), 1.0, 1.0);
-				//vec4 col = texture2D(tex, uVu);
-				gl_FragColor = vec4(1.0,1.0,1.0,1.0);	
+				gl_FragColor = color; //vec4(1.0,1.0,1.0,1.0);	
 			}
 		}
 
