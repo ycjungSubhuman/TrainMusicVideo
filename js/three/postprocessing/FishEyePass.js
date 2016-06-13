@@ -1,4 +1,4 @@
-FishEyePass = function ( camera ) {
+FishEyePass = function ( camera, radius ) {
 	THREE.Pass.call( this );
     
 	if ( FishEyeShader === undefined )
@@ -7,6 +7,8 @@ FishEyePass = function ( camera ) {
 	var fishEyeShader = FishEyeShader;
 	var fishEyeUniforms = THREE.UniformsUtils.clone( fishEyeShader.uniforms );
     
+	if (radius !== undefined)
+		fishEyeUniforms[ "radius" ].value = radius;
 	fishEyeUniforms[ "aspect" ].value = camera.aspect;
     
 	this.material = new THREE.ShaderMaterial( {

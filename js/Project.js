@@ -7,6 +7,7 @@ var Project = {
 		'textures/aspalt.png',
 		'textures/aspalt2.png',
 		'textures/lensflare0.png',
+		'textures/wallpaper.png',
 	],
 	modelfiles: [
 		['deer', 'obj/Deer/deer.obj', 'obj/Deer/deer.mtl'],
