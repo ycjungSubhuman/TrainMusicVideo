@@ -55,6 +55,18 @@
 				this.plane2.add(roadline2);
 			}
 			
+			for(var i=0; i<50; i++)
+			{
+				var bu1 = Asset('building1');
+				var bu2 = Asset('building2');
+				bu1.scale.copy(new THREE.Vector3(40.0 / 48.0704, ((Math.random() * 20.0) + 50.0) / 77.0, 40.0 / 39.4836));
+				bu2.scale.copy(new THREE.Vector3(40 / 53, ((Math.random() * 20.0) + 50.0) / 61.0, 40 / 53));
+				bu1.position.x = i*40 - 980;
+				bu2.position.x = i*40 - 980;
+				this.plane1.add(bu1);
+				this.plane2.add(bu2);
+			}
+			
             this.camrespos = Math.floor(Camera.position.x) % 4000;
 			
 			var tmp = new THREE.Object3D ();
