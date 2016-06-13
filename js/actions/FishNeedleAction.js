@@ -12,11 +12,12 @@
 			this.target.add(this.fish);
 			this.on("boom", this.boom);
 			this.on("pluck", this.pluck);
-			this.geo_needle = new THREE.TetrahedronGeometry( 1 );
+			this.geo_needle = new THREE.TetrahedronGeometry( 0.03 );
 			this.mat_needle = new THREE.MeshLambertMaterial( 0xffffff );
 			this.light = new THREE.PointLight();
-			this.light.position.x = 5;
-			this.light.position.y = 5;
+			this.light.intensity = 3;
+			this.light.position.x = 2;
+			this.light.position.y = 2;
 			this.target.add(this.light);
 			super.start ();
 		}
@@ -26,19 +27,21 @@
 		pluck () {
 			var pivot = new THREE.Object3D();
 			var needle = new THREE.Mesh( this.geo_needle, this.mat_needle );
+			this.fish.add(pivot);
 			pivot.add(needle);
-			needle.position.x = 3 + Math.random();
+			needle.position.x = 0.5 + Math.random();
 
 			pivot.rotation.x = Math.random() *2;
 			pivot.rotation.y = Math.random() *2;
 			pivot.rotation.z = Math.random() *2;
-			needle.scale.x = Math.random() * 2;
+			needle.scale.x = 1 + Math.random() * 2;
+			needle.scale.y = 0.3;
+			needle.scale.z = 0.3;
 
-			Player.timeline.add(TweenLite.to(needle.position, 0.3, {
+			Player.timeline.add(TweenLite.to(needle.position, 0.1, {
 				x: 0,
 				ease: Power4.easeOut,
 			}), Player.timeline.time());
-
 		}
 		update (self) {
 			//TODO: implement popappear update
