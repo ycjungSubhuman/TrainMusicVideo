@@ -80,10 +80,10 @@ window.onload = function() {
 	
 	bokeh = new THREE.BokehPass( scene, camera, 
 	{
-		focus : 1.5,
-		aspect : undefined,
-		aperture : undefined,
-		maxblur : undefined
+		focalDepth : 1.0,
+		focalLength : 24.0,
+		fstop : 0.9,
+		maxblur : 1.0
 	});
 	bokeh.renderToScreen = true;
 	composer.addPass( bokeh );
@@ -91,8 +91,8 @@ window.onload = function() {
 	function render() {
 		requestAnimationFrame(render);
 		composer.render( scene, camera );
-		cube.rotation.x += 0.001;
-		cube.rotation.y += 0.003;
+		cube.rotation.x += 0.01;
+		cube.rotation.y += 0.03;
 		uniforms.time.value += 0.1;
 	}
 	render();
