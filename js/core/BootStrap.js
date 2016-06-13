@@ -42,39 +42,104 @@
 		});
 		//event timeline edit
 		_.each (notes, function (note) {
-			if (note.track == 2) { //boom
+			if (note.track == 2) {
+				//Basedrum
 				SWriter.addCallBack(note.time_start, function() {
 					ActionManager.emitEvent("boom");
 				});
 			}
 			else if (note.track == 3) {
+				//Seekchic maracas
 				SWriter.addCallBack(note.time_start, function() {
 					Renderer.hue = 0xaa;
 					TweenLite.to(Renderer, 0.4, {hue: 0x00 });
 				});
 			}
 			else if (note.track == 4) {
-				/*var geo_cube = new THREE.CubeGeometry ( 1, 1, 1 );
-				var material = new THREE.MeshBasicMaterial ();
-				var cube = new THREE.Mesh (geo_cube, material);
-				var action = new Action (cube, note.time_start, note.time_end, note.track); //do nothing
-				var cam = new PulsatingMoonShot (cube, note.time_start, note.time_end, note.track);
-				SWriter.addHead(action, cam);*/
+				//bass pluck
+				SWriter.addCallBack(note.time_start, function () {
+					ActionManager.emitEvent("pluck");
+				});
+			}
+			else if (note.track == 5) { 
+				//GoldFishScene
+			}
+			else if (note.track == 6) {
+				//Car intro Scene
 				var target = new THREE.Object3D ();
-				var action = new DotsAction (target, note.time_start, note.time_end, note.track);
+				var action = new CarIntroAction (target, note.time_start, note.time_end, note.track); //do nothing
+				var cam = new CarIntroShot (target, note.time_start, note.time_end, note.track);
+				SWriter.addHead(action);
+				SWriter.addHead(cam);
+			}
+			else if (note.track == 7) {
+				//vocal note events in StreetScene
+			}
+			else if (note.track == 8) {
+				//Street riding Scene
+				var target = new THREE.Object3D ();
+				var action = new CarSceneAction (target, note.time_start, note.time_end, note.track); //do nothing
+				var cam = new CarSceneShot (target, note.time_start, note.time_end, note.track);
+				SWriter.addHead(action);
+				SWriter.addHead(cam);
+			}
+			else if (note.track == 9) {
+				//Dots Flicker Scene
+				var target = new THREE.Object3D ();
+				var action = new DotsAction (target, note.time_start, note.time_end, note.track); //do nothing
 				var cam = new SmoothSweepShot (target, note.time_start, note.time_end, note.track);
 				SWriter.addHead(action);
 				SWriter.addHead(cam);
 			}
-			else if (note.track == 5) { 
-				var geo_sphere = new THREE.SphereGeometry ( 0.5, 32, 32 );
-				var material = new THREE.MeshLambertMaterial ( 0xffffff );
-				var light = new THREE.PointLight( 0x333333, 3, 100 );
-				var sphere = new THREE.Mesh (geo_sphere, material);
-				light.position.set(30, 30, 30);
-				sphere.add (light);
-				var action = new PulsateAction (sphere, note.time_start, note.time_end, note.track); //do nothing
-				var cam = new MoonShot (sphere, note.time_start, note.time_end, note.track);
+			else if (note.track == 10) { //10
+				//Gold Fish 2 : Gold fish stabbed by needles
+				var target = new THREE.Object3D ();
+				var action = new FishNeedleAction (target, note.time_start, note.time_end, note.track); //do nothing
+				var cam = new FishNeedleShot (target, note.time_start, note.time_end, note.track);
+				SWriter.addHead(action);
+				SWriter.addHead(cam);
+			}
+			else if (note.track == 11) {
+				//Street riding scene 2
+				var target = new THREE.Object3D ();
+				var action = new CarSceneAction (target, note.time_start, note.time_end, note.track); //do nothing
+				var cam = new CarSceneShot (target, note.time_start, note.time_end, note.track);
+				SWriter.addHead(action);
+				SWriter.addHead(cam);
+			}
+			else if (note.track == 12) {
+				//Dots Flicker 2
+				var target = new THREE.Object3D ();
+				var action = new DotsAction (target, note.time_start, note.time_end, note.track); //do nothing
+				var cam = new PulsatingMoonShot (target, note.time_start, note.time_end, note.track);
+				SWriter.addHead(action);
+				SWriter.addHead(cam);
+			}
+			else if (note.track == 13) {
+				//Deer Scene
+			}
+			else if (note.track == 14) {
+				//Deer Dead Scene
+				var target = new THREE.Object3D ();
+				var action = new DeerAction (target, note.time_start, note.time_end, note.track);
+				var cam = new DeerShot (target, note.time_start, note.time_end, note.track);
+				SWriter.addHead(action);
+				SWriter.addHead(cam);
+			}
+			else if (note.track == 15) {
+				//Fish alive
+			}
+			else if (note.track == 16) {
+				//Fish Dead
+			}
+			else if (note.track == 17) {
+				//Street Scene
+			}
+			else if (note.track == 18) {
+				//Dots Scene final
+				var target = new THREE.Object3D ();
+				var action = new DotsAction (target, note.time_start, note.time_end, note.track); //do nothing
+				var cam = new PulsatingMoonShot (target, note.time_start, note.time_end, note.track);
 				SWriter.addHead(action);
 				SWriter.addHead(cam);
 			}
@@ -86,7 +151,9 @@
 			console.log('bootstrap init');
 			AssetManager.init ();
 			Player.init ();
+			THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
 			var list_promises = _.map(Project.assetfiles, AssetManager.load);
+			list_promises = list_promises.concat(_.map(Project.modelfiles, AssetManager.loadmodel));
 
 			Promise.all(list_promises)
 			.then (function (vals) {

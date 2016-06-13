@@ -6,6 +6,11 @@
 		}
 		start () {
 			//TODO: popappear render init
+			this.fish = Asset('goldfish').clone();
+			this.fish.scale.set (20, 20, 20);
+			this.fish.position.x = 1;
+			Scene.add(new THREE.AmbientLight( 0x333333 ));
+			this.target.add(this.fish);
 			this.on("boom", this.boom);
 			super.start ();
 		}

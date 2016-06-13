@@ -5,6 +5,8 @@
 				window.innerWidth / window.innerHeight,
 				0.1, 40 );
 			super (camera, time_start, time_end, duration);
+			this.target.direction = new THREE.Vector3 (0, 0, -1);
+			this.target.direye = new THREE.Vector3 (0, 0, -1);
 			this.subject = subject;
 			this.prevcamera = null;
 		}

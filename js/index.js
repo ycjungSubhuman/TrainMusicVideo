@@ -1,6 +1,7 @@
 window.onresize = function () {
 	Camera.emit("resize");
 	Renderer.emit("resize");
+	console.log('resized');
 }
 
 window.onload = function() {
@@ -13,20 +14,18 @@ window.onload = function() {
 		time: {type: "f", value: 0},
 	};
 
-	var material = new THREE.ShaderMaterial({
-		uniforms: uniforms,
-		vertexShader: Shaders.plane_vertex_default,
-		fragmentShader: Shaders.plane_fragment_default,
-	});
+	var material = new THREE.MeshBasicMaterial();
 
 	var cube = new THREE.Mesh( geometry, material );
 	cube.name = "cube_load";
+	cube.position.x = -2;
 	Scene.add( cube );
 
 
 	Camera.position.y = 12.0;
 	Camera.position.z = -4.0;
-	Camera.lookAt(new THREE.Vector3(0, 0, -4.0));
+	Camera.direction = new THREE.Vector3(0, -1, 0);
+	Camera.lookAt(new THREE.Vector3(0,-1,0));
 
 	function render() {
 		if (Project.loaded) {

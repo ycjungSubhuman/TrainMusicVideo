@@ -21,9 +21,9 @@
 		}
 		update (self) {
 			//rotate camera around the object
+			this.target.direction = this.target.getWorldPosition().negate();
 			this.target.position.z = 5 * Math.cos(this.pivot.rotation.z);
 			this.target.position.x = 5 * Math.sin(this.pivot.rotation.z);
-			this.target.lookAt(new THREE.Vector3(0,0,0));
 			super.update (self);
 		}
 		end () {

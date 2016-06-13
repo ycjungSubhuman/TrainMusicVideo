@@ -11,9 +11,9 @@
 			super.start ();
 			var self = this;
 			var posvec = new THREE.Vector3 ();
-			posvec.x = Math.random () * 2 - 1;
-			posvec.y = Math.random () * 2 - 1;
-			posvec.z = Math.random () * 2 - 1;
+			posvec.x = Math.random () * 6 - 3;
+			posvec.y = Math.random () * 6 - 3;
+			posvec.z = Math.random () * 6 - 3;
 
 			Player.timeline.add(TweenLite.to(this.target.position, 4 * this.duration, {
 				x: self.target.position.x + posvec.x,

@@ -47,6 +47,7 @@
 			//TODO: popappear render init
 			//bind 'boom' event
 			this.on("boom", this.boom);
+			this.target.direction = new THREE.Vector3(1, 0 ,0);
 
 			super.start ();
 		}
@@ -56,6 +57,7 @@
 		update (self) {
 			var freqdata = Analyser.getFreqData();
 			var size_sample = Math.floor(freqdata.length / self.params.length);
+			
 
 			for (var i=0; i<self.params.length; i++) {
 				var sum = 0;
