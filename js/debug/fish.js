@@ -47,7 +47,7 @@ window.onload = function() {
 	composer = new THREE.EffectComposer( renderer );
 	composer.addPass( new THREE.RenderPass( scene, camera ) );
 	
-	fishEye = new FishEyePass( camera );
+	fishEye = new FishEyePass( camera, 0.3 );
 	fishEye.renderToScreen = true;
 	composer.addPass( fishEye );
 	
@@ -63,7 +63,6 @@ window.onload = function() {
 			camera.position.z = 1.2 + 0.2 * Math.sin(doh * 5.0);
 
 			var distance = camera.position.length();
-    		fishEye.material.uniforms[ "radius" ].value = 0.3;
 			fishEye.material.uniforms[ "distance" ].value = distance;
 			fishEye.material.uniforms[ "aspect" ].value = camera.aspect;
 		}

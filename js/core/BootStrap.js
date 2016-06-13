@@ -73,6 +73,11 @@
 			}
 			else if (note.track == 5) { 
 				//GoldFishScene
+				var target = new THREE.Object3D ();
+				var action = new DoubleGoldfishAction (target, note.time_start, note.time_end, note.track); //do nothing
+				var cam = new GoldfishShot (target, note.time_start, note.time_end, note.track);
+				SWriter.addHead(action);
+				SWriter.addHead(cam);
 			}
 			else if (note.track == 6) {
 				//Car intro Scene
