@@ -8,7 +8,7 @@
 			//TODO: popappear render init
 			this.fish = Asset('goldfish').clone();
 			this.fish.scale.set (20, 20, 20);
-			this.target.add(new THREE.AmbientLight( 0x333333 ));
+			this.target.add(new THREE.AmbientLight( 0xdddddd ));
 			this.target.add(this.fish);
 			this.on("boom", this.boom);
 			this.on("pluck", this.pluck);
@@ -16,8 +16,8 @@
 			this.mat_needle = new THREE.MeshLambertMaterial( 0xffffff );
 			this.light = new THREE.PointLight();
 			this.light.intensity = 3;
-			this.light.position.x = 2;
-			this.light.position.y = 2;
+			this.light.position.x = 5;
+			this.light.position.y = 5;
 			this.target.add(this.light);
 			super.start ();
 		}
@@ -48,6 +48,7 @@
 			super.update(self);
 		}
 		end () {
+			document.fishd = this.target;
 			super.end ();
 		}
 	}

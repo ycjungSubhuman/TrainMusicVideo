@@ -47,6 +47,11 @@
 				SWriter.addCallBack(note.time_start, function() {
 					ActionManager.emitEvent("boom");
 				});
+				if (note.time_start-(1/Project.bpm)*60*6 > 0) {
+					SWriter.addCallBack(note.time_start-(1/Project.bpm)*60*6, function() {
+						ActionManager.emitEvent("Basedrum_add");
+					});
+				}
 			}
 			else if (note.track == 3) {
 				//Seekchic maracas
@@ -54,6 +59,11 @@
 					Renderer.hue = 0xaa;
 					TweenLite.to(Renderer, 0.4, {hue: 0x00 });
 				});
+				if (note.time_start-(1/Project.bpm)*60*6 > 0) {
+					SWriter.addCallBack(note.time_start-(1/Project.bpm)*60*6, function() {
+						ActionManager.emitEvent("Tschack_add");
+					});
+				}
 			}
 			else if (note.track == 4) {
 				//bass pluck
@@ -117,6 +127,13 @@
 			}
 			else if (note.track == 13) {
 				//Deer Scene
+				var target = new THREE.Object3D ();
+				var action = new DeerAliveAction (target, note.time_start, note.time_end, note.track);
+				var action2 = new DotsAction (target, note.time_start, note.time_end, note.track);
+				var cam = new DeerAliveShot (target, note.time_start, note.time_end, note.track);
+				SWriter.addHead(action);
+				SWriter.addHead(action2);
+				SWriter.addHead(cam);
 			}
 			else if (note.track == 14) {
 				//Deer Dead Scene
@@ -128,6 +145,13 @@
 			}
 			else if (note.track == 15) {
 				//Fish alive
+				var target = new THREE.Object3D ();
+				var action = new FishDeerAction (target, note.time_start, note.time_end, note.track);
+				var action2 = new DotsAction (target, note.time_start, note.time_end, note.track);
+				var cam = new FishDeerShot (target, note.time_start, note.time_end, note.track);
+				SWriter.addHead(action);
+				SWriter.addHead(action2);
+				SWriter.addHead(cam);
 			}
 			else if (note.track == 16) {
 				//Fish Dead

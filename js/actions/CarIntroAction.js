@@ -42,7 +42,7 @@
 			this.light1.add(flare);
 
 			this.light2 = new THREE.SpotLight(0xffffdd);
-			this.light1.target.position.z = 100000;
+			this.light2.target.position.z = 100000;
 			this.light2.add(plight2);
 			this.light2.add(flare.clone());
 
@@ -60,10 +60,10 @@
 			this.light1.position.z = 0.15;
 			this.light1.position.y = -1.6;
 			this.light1.position.x = 0.6;
+
 			this.light2.position.z = 0.15;
 			this.light2.position.y = -1.6;
 			this.light2.position.x = -0.6;
-
 		}
 		start () {
 			//TODO: popappear render init
