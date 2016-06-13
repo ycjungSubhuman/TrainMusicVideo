@@ -199,7 +199,7 @@
 			}
 		}
 		Tschack_add (){
-			if(!isboom)
+			if(!this.isboom)
 			{
 				this.boom();
 				this.istschack = true;
