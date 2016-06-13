@@ -1,9 +1,9 @@
 (function (scope) {
 	scope.CamShot = class extends Action {
 		constructor (subject, time_start, time_end, duration) {
-			var camera = new THREE.PerspectiveCamera( 75, 
+			var camera = new THREE.PerspectiveCamera( 120, 
 				window.innerWidth / window.innerHeight,
-				0.1, 40 );
+				0.1, 800 );
 			super (camera, time_start, time_end, duration);
 			this.target.direction = new THREE.Vector3 (0, 0, -1);
 			this.target.direye = new THREE.Vector3 (0, 0, -1);

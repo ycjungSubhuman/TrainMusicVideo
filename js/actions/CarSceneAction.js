@@ -3,17 +3,22 @@
 		constructor (target, time_start, time_end, track) {
 			super (target, time_start, time_end, track);
 			//TODO: implement init for this action 
-            var geo_plane = new THREE.PlaneGeometry(2000, 200, 200, 20);
+            var geo_plane = new THREE.PlaneGeometry(2000, 600, 200, 20);
             
 			geo_plane.rotateX(-Math.PI/2);
+			geo_plane.rotateY(-Math.PI/2);
 			
 			var aspalt = Asset('textures/aspalt.png');
-			aspalt.repeat.set( 8, 8 );
+			aspalt.wrapS = aspalt.wrapT = THREE.RepeatWrapping;
+			aspalt.repeat.set( 2, 20 );
+
+			var bdtex = Asset('obj/building/lotteCastle.png');
 			
             this.uniforms1 = {
-        		time: {type: "f", value: 0},
+        		time: {type: "f", value: document.time},
 				istextured: {type: "b", value: true},
-				tex: {type: "t", value: aspalt}
+				tex: {type: "t", value: aspalt},
+				texrepeat: {type: "f", value: 20.0},
         	};
             
             var material1 = new THREE.ShaderMaterial({
@@ -27,13 +32,14 @@
 	        this.plane1 = new THREE.Mesh( geo_plane, material1 );
 	        this.plane2 = new THREE.Mesh( geo_plane, material1 );
 			
-			geo_plane = new THREE.PlaneGeometry(13, 2, 1, 1);
+			geo_plane = new THREE.PlaneGeometry(3, 13, 1, 1);
 			geo_plane.rotateX(-Math.PI/2);
 			
 			this.uniforms2 = {
-        		time: {type: "f", value: 0},
+        		time: {type: "f", value: document.time},
 				istextured: {type: "b", value: false},
-				tex: {type: "t", value: aspalt}
+				tex: {type: "t", value: aspalt},
+				texrepeat: {type: "f", value: 20.0},
         	};
 			
 			var material2 = new THREE.ShaderMaterial({
@@ -47,27 +53,54 @@
 			{
 				var roadline1 = new THREE.Mesh( geo_plane, material2 );
 				var roadline2 = new THREE.Mesh( geo_plane, material2 );
-				roadline1.position.y = 0.1;
-				roadline1.position.x = -990 + i*20;
+				roadline1.position.y = 0.2;
+				roadline1.position.z = -990 + i*20;
 				roadline2.position.y = 0.1;
-				roadline2.position.x = -990 + i*20;
+				roadline2.position.z = -990 + i*20;
 				this.plane1.add(roadline1);
 				this.plane2.add(roadline2);
 			}
-			
-			for(var i=0; i<50; i++)
+
+			this.uniforms3 = {
+        		time: {type: "f", value: document.time},
+				istextured: {type: "b", value: true},
+				tex: {type: "t", value: bdtex},
+				texrepeat: {type: "f", value: 1},
+        	};
+
+			var material3 = new THREE.ShaderMaterial({
+				uniforms: this.uniforms3,
+				vertexShader: Shaders.plane_vertex_default,
+		        fragmentShader: Shaders.plane_fragment_default,
+		        wireframe: false,
+			})
+
+			for(var tmp=0; tmp<2; tmp++)
 			{
-				var bu1 = Asset('building1');
-				var bu2 = Asset('building2');
-				bu1.scale.copy(new THREE.Vector3(40.0 / 48.0704, ((Math.random() * 20.0) + 50.0) / 77.0, 40.0 / 39.4836));
-				bu2.scale.copy(new THREE.Vector3(40 / 53, ((Math.random() * 20.0) + 50.0) / 61.0, 40 / 53));
-				bu1.position.x = i*40 - 980;
-				bu2.position.x = i*40 - 980;
-				this.plane1.add(bu1);
-				this.plane2.add(bu2);
+				var buX = -400 + 800 * tmp;
+				for(var i=0; i<50; i++)
+				{
+					var bu1 = Asset('building').clone();
+					var bu2 = Asset('building').clone();
+					bu1.children[0].material = material3;
+					bu2.children[0].material = material3;
+					bu1.rotateY(-Math.PI);
+					bu2.rotateY(-Math.PI);
+					var buY = ((Math.random() * 50.0) + 300.0) / 90.0;
+					bu1.scale.copy(new THREE.Vector3(200.0 / 30.0, buY, 200.0 / 22.0));
+					bu1.position.z = i*200 - 900;
+					bu1.position.x = buX;
+					bu1.position.y = buY;
+					this.plane1.add(bu1);
+					bu2.scale.copy(new THREE.Vector3(200.0 / 30.0, buY, 200.0 / 22.0));
+					bu2.position.z = i*200 - 900;
+					bu2.position.x = buX;
+					bu2.position.y = buY;
+					this.plane2.add(bu2);
+				}
 			}
 			
-            this.camrespos = Math.floor(Camera.position.x) % 4000;
+            this.camrespos = Math.floor(Camera.position.z) % 4000;
 			
 			var tmp = new THREE.Object3D ();
 			tmp.add(this.plane1);
@@ -76,12 +109,12 @@
 		}
 		start () {
 			//TODO: popappear render init            
-            this.plane1.position.x = 1000;
-	        this.plane2.position.x = 3000;
+            this.plane1.position.z = 1000;
+	        this.plane2.position.z = 3000;
 			
 
 			
-			//this.on("boom", this.boom);
+			this.on("boom", this.boom);
 			super.start ();
 		}
 		boom () {
@@ -95,17 +128,19 @@
 		}
 		update (self) {
 			//TODO: implement popappear update
-            self.uniforms1.time.value += 0.08;
-			self.uniforms2.time.value += 0.08;
-            self.camrespos = Math.floor(Camera.position.x) % 4000;
+			document.time += 0.08;
+            self.uniforms1.time.value = document.time;
+			self.uniforms2.time.value = document.time;
+			self.uniforms3.time.value = document.time;
+            self.camrespos = Math.floor(Camera.position.z) % 4000;
             if((self.camrespos >= 2000) && (!self.isplane))
             {
-                self.plane1.position.x = self.plane2.position.x+2000.0;
+                self.plane1.position.z = self.plane2.position.z+2000.0;
                 self.isplane = true;
             }
             else if((self.camrespos < 2000) && self.isplane)
             {
-                self.plane2.position.x = self.plane1.position.x+2000.0;
+                self.plane2.position.z = self.plane1.position.z+2000.0;
                 self.isplane = false;
             }
             super.update(self);

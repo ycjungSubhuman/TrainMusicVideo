@@ -5,10 +5,10 @@
 			this.pivot = new THREE.Object3D (); //rotation pivot
 			this.subject.add (this.pivot);
 			this.pivot.add(this.target);
-			this.target.position.x = 0;
+			this.target.position.z = 0;
 			this.target.position.y = 10;
 			this.target.near = 0.1;
-			this.target.far = 200;
+			this.target.far = 800;
 			this.target.updateProjectionMatrix ();
 		}
 		start () {
@@ -25,8 +25,8 @@
 		}
 		update (self) {
 			//rotate camera around the object
-			this.target.position.x += 1.6 
-			Camera.direction = new THREE.Vector3(-1,0,0);
+			this.target.position.z += 1.6 
+			Camera.direction = new THREE.Vector3(0,0,1);
 			
 			super.update (self);
 		}

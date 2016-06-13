@@ -68,8 +68,8 @@
 			}
 			else if (note.track == 5) { 
 				var target = new THREE.Object3D ();
-				var action = new CarSceneAction (target, note.time_start, note.time_end, note.track); //do nothing
-				var cam = new CarSceneShot (target, note.time_start, note.time_end, note.track);
+				var action = new CarSceneAction (target, note.time_start, 100000000000, note.track); //do nothing
+				var cam = new CarSceneShot (target, note.time_start, 100000000000, note.track);
 				SWriter.addHead(action);
 				SWriter.addHead(cam);
 			}

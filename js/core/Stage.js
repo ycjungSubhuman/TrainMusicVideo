@@ -39,8 +39,8 @@
 
 			//camera control
 			document.addEventListener('mousemove', function (event) {
-				document.tar_x = (event.clientX - window.innerWidth / 2) / window.innerWidth * 5;
-				document.tar_y = ((-event.clientY) + window.innerHeight / 2) / window.innerHeight * 5;
+				document.tar_x = (event.clientX - window.innerWidth / 2) / window.innerWidth * 0.5;
+				document.tar_y = ((-event.clientY) + window.innerHeight / 2) / window.innerHeight * 0.5;
 			});
 			Loop.loop(function () {
 				document.delta_x = document.delta_x + (document.tar_x - document.delta_x) * 0.03;
@@ -51,9 +51,11 @@
 				var dir_x = dir_look.clone().cross(dir_y);
 				var dir_new = dir_look.clone().add(dir_x.clone().multiplyScalar(document.delta_x)).add(dir_y.clone().multiplyScalar(document.delta_y)).normalize();
 				Camera.dir_eye = dir_new;
-				Camera.dir_eye.x = -dir_new.x;
 				Camera.lookAt(pos_cam.clone().add(Camera.dir_eye));
 			});
+
+			//uniform time 
+			document.time = 0;
 			Stage.emit("done");
 		},
 		done: function () {
