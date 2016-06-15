@@ -1,5 +1,5 @@
 (function (scope) {
-	scope.DoubleGoldfishAction = class extends Action {
+	scope.FishOutAction = class extends Action {
 		constructor (target, time_start, time_end, track) {
 			super (target, time_start, time_end, track);
 			//TODO: implement init for this action 
@@ -14,7 +14,6 @@
             this.fish2.rotation.z = Math.PI / 2.0;
             this.target.add( new THREE.AmbientLight(0xffffff));
 			this.target.add(this.fish1);
-            this.target.add(this.fish2);
 			this.on("boom", this.boom);
 			super.start ();
             
@@ -31,10 +30,7 @@
         		mat.map = tex;
         		var plane = new THREE.Mesh(geo_plane, mat);
         		plane.position.x = -1.0;
-                plane.position.x = -20;
-                plane.position.z = -40;
-                plane.scale.set(40, 40, 40);
-        		plane.rotation.x = -Math.PI/2;
+        		plane.rotation.x = Math.PI/2;
         		self.target.add (plane);
 	        });
 
@@ -60,9 +56,9 @@
 
 			this.target.scale.set(1, 1, 1);
 			TweenLite.to(this.target.scale, 0.5, {
-				x: 0.95,
-				y: 0.95,
-				z: 0.95,
+				x: 0.8,
+				y: 0.8,
+				z: 0.8,
 				ease: Power4.easeOut,
 			});
 		}

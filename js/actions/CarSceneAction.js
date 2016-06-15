@@ -157,8 +157,8 @@
 			}
 
 			this.on("boom", this.boom);
-			this.on("Tschack_add", this.Tschack_add);
-			this.on("Bassdrum_add", this.Bassdrum_add);
+			//this.on("Tschack_add", this.Tschack_add);
+			//this.on("Bassdrum_add", this.Bassdrum_add);
 			super.start ();
 		}
 		boom () {

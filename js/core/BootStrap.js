@@ -160,6 +160,11 @@
 			}
 			else if (note.track == 16) {
 				//Fish Dead
+				var target = new THREE.Object3D ();
+				var action = new FishOutAction (target, note.time_start, note.time_end, note.track); //do nothing
+				var cam = new FishOutShot (target, note.time_start, note.time_end, note.track);
+				SWriter.addHead(action);
+				SWriter.addHead(cam);
 			}
 			else if (note.track == 17) {
 				//Street Scene
