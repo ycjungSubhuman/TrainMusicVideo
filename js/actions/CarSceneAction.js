@@ -4,7 +4,20 @@
 			super (target, time_start, time_end, track);
 			//TODO: implement init for this action 
             var geo_plane = new THREE.PlaneGeometry(2000, 900, 200, 20);
-           
+
+			var moon_plane = new THREE.PlaneGeometry(600,600,1,1);
+			//moon_plane.rotateY(Math.PI);
+			var moon_tex = Asset('textures/moon.png');
+			
+			var moonmat = new THREE.MeshBasicMaterial ({
+				map: moon_tex,
+				transparent: true,
+				opacity: 1,
+			});
+            this.moon = new THREE.Mesh( moon_plane, moonmat );
+			this.moon.name = "moon";
+			this.moon.rotation.y = Math.PI;
+
 			geo_plane.rotateX(-Math.PI/2);
 			geo_plane.rotateY(-Math.PI/2);
 			
@@ -85,6 +98,7 @@
 			}
 			this.isboom = false;
 			this.istschack = false;
+			this.boompos = 0;
 		}
 		start () {
 			var material3 = new THREE.ShaderMaterial({
@@ -125,7 +139,9 @@
 			this.tmp = new THREE.Object3D ();
 			this.tmp.add(this.plane1);
 			this.tmp.add(this.plane2);
+			this.tmp.add(this.moon);
 			this.target.add (this.tmp);
+			
 
 			this.queue1 = [new THREE.Object3D (),new THREE.Object3D (),new THREE.Object3D (),new THREE.Object3D (),new THREE.Object3D (),new THREE.Object3D ()];
 			this.queue2 = [new THREE.Object3D (),new THREE.Object3D (),new THREE.Object3D (),new THREE.Object3D (),new THREE.Object3D (),new THREE.Object3D ()];
@@ -133,6 +149,9 @@
 			//TODO: popappear render init            
             this.plane1.position.z = 1000;
 	        this.plane2.position.z = 3000;
+
+			this.moon.position.z = 1000;
+			this.moon.position.y = 600;
 
 			this.queue3 = [];
 			this.queue4 = [];
@@ -154,11 +173,11 @@
 				this.tmp.add(bu2);
 				this.queue3.push(bu1);
 				this.queue3.push(bu2);
-			}
+			}			
 
 			this.on("boom", this.boom);
-			this.on("Tschack_add", this.Tschack_add);
-			this.on("Bassdrum_add", this.Bassdrum_add);
+			//this.on("Tschack_add", this.Tschack_add);
+			//this.on("Basedrum_add", this.Bassdrum_add);
 			super.start ();
 		}
 		boom () {
@@ -194,8 +213,10 @@
 				this.queue1.push(bu1);
 				this.queue2.push(bu2);
 				this.isboom = true;
-
+				this.boompos = bu1.position.z;
+				this.moon.scale.copy(new THREE.Vector3(800/600, 800/600, 1));
 				//this.Bassdrum_add();
+				
 			}
 		}
 		Tschack_add (){
@@ -205,15 +226,16 @@
 				this.istschack = true;
 			}
 			this.tmp.remove(this.queue1[5]);
-			var bu1 = this.nightbd.clone();
+			this.tmp.remove(this.queue2[5]);
+			var bu1 = this.bd.clone();
 			var bu2 = this.nightbd.clone();  
-			var buY = ((Math.random() * 50.0) + 100.0) / 90.0;
+			var buY = ((Math.random() * 50.0) + 150.0) / 90.0;
 			bu1.scale.copy(new THREE.Vector3(100.0 / 30.0, buY, 100.0 / 22.0));
-			bu1.position.z = Camera.position.z + 49.6*4.0*6.0;
-			bu1.position.x = 600;
+			bu1.position.z = boompos;
+			bu1.position.x = 0;
 			bu1.position.y = buY;
 			bu2.scale.copy(new THREE.Vector3(100.0 / 30.0, buY, 100.0 / 22.0));
-			bu2.position.z = Camera.position.z + 49.6*4.0*6.0;
+			bu2.position.z = boompos;
 			bu2.position.x = -600;
 			bu2.position.y = buY;
 			this.tmp.add(bu1);
@@ -223,22 +245,8 @@
 			this.isboom = false;
 		}
 		Bassdrum_add(){
-			//var lamp1 = this.stlamp.clone();
-			var lamp1 = this.nightbd.clone();
-			var lamp2 = this.stlamp.clone();
-			console.log("bd:"+lamp1);
-			//lamp1.scale.copy(new THREE.Vector3(100.0 / 19.0, 100.0/47.0, 22.0));
-			lamp1.position.z = Camera.position.z + 49.6*4.0*6.0;
-			lamp1.position.x = 0;
-			lamp1.position.y = 23;
-			console.log("bd::"+lamp1.position.z);
-			lamp2.position.z = Camera.position.z + 49.6*4.0*6.0;
-			lamp2.position.x = 400;
-			lamp2.position.y = 23;
-			this.tmp.add(lamp1);
-			this.tmp.add(lamp2);
-			this.queue4.push(lamp1);
-			this.queue4.push(lamp2);
+			this.moon.scale.copy(new THREE.Vector3(800/600, 800/600, 1));
+			console.log("bass");
 		}
 		update (self) {
 			//TODO: implement popappear update
@@ -247,6 +255,8 @@
 			self.uniforms2.time.value = document.time;
 			self.uniforms3.time.value = document.time;
 			self.uniforms4.time.value = document.time;
+			self.moon.position.z = Camera.position.z + 1000;
+			self.moon.scale.copy(new THREE.Vector3(self.moon.scale.x*0.4 + 0.6, self.moon.scale.x*0.4 + 0.6, 1));
             self.camrespos = Math.floor(Camera.position.z) % 4000;
             if((self.camrespos >= 2000) && (!self.isplane))
             {

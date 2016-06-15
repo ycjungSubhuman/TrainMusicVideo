@@ -6,6 +6,7 @@
 			this.subject.add (this.pivot);
 			this.pivot.add(this.target);
 			this.target.position.z = 0;
+			//this.target.position.x = 1200;
 			this.target.position.y = 10;
 			this.target.near = 0.1;
 			this.target.far = 1200;
