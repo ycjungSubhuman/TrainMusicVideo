@@ -11,6 +11,7 @@ var Project = {
 		'obj/building_night/building_night.png',
 		'obj/streetlamp/streetlamp.png',
 		'textures/wallpaper.png',
+		'textures/moon.png',
 	],
 	modelfiles: [
 		['deer', 'obj/Deer/deer.obj', 'obj/Deer/deer.mtl'],

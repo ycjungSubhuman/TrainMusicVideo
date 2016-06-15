@@ -45,25 +45,28 @@ var Shaders = {
 
 	`,
 	cubes_vertex_default:`
-		uniform float time;
-		void main() {
+		uniform float time;		
+		void main() {			
 			gl_Position = projectionMatrix *
 			modelViewMatrix *
 			vec4(position, 1);
-		}
+		} 
 
 		`,
 	vd: `
+		varying vec2 uVu;
 		void main() {
+			uVu = uv;
 			gl_Position = projectionMatrix *
 			modelViewMatrix *
 			vec4(position, 1);
 		}
 	`,
 	fd: `
+		varying vec2 uVu;
 		uniform Sampler2D map;
 		void main() {
-			gl_FragColor = texture (map, uV);
+			gl_FragColor = texture2D(map, uVu);
 		}
 	`,
 	cubes_fragment_default:`
