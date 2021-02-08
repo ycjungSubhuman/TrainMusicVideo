@@ -12,6 +12,6 @@ This is a fan music video for "Honne - Warm On A Cold Night (Embody Remix)". We 
 
 ## Discussion
 
-The goal of this project is to create a music video by linking audio and visual events with MIDI notes. The visual events are all procedural, and programmed with code.
+The goal of this project is to create a music video by linking audio and visual events with MIDI notes. All the scenes are created procedurally.
 
 This was my first try with JavaScript, so the project configuration is a little clunky.
