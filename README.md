@@ -1,5 +1,6 @@
 # A Train Trip
 
+![image](doc/thumbnail.png)
 
 [Watch here. Click anywhere to play/pause](http://ycjungsubhuman.github.io/TrainMusicVideo/)
 
