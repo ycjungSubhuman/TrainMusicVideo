@@ -12,4 +12,4 @@ Built by me, 박준수, 오윤이, 고병현.
 
 The goal of this project is to create a music video by linking audio and visual events with MIDI notes. The visual events are all procedural, and programmed with code.
 
-This was my first try at JavaScript, so the project configuration is a little clunky.
+This was my first try with JavaScript, so the project configuration is a little clunky.
