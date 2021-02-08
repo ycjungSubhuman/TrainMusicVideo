@@ -4,7 +4,7 @@
 
 [Watch here. Click anywhere to play/pause](http://ycjungsubhuman.github.io/TrainMusicVideo/)
 
-A web music video built ThreeJS.
+A web music video built with ThreeJS.
 
 Built by me, 박준수, 오윤이, 고병현.
 
