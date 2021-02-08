@@ -6,6 +6,9 @@
 			this.timeline.stop();
 		},
 		play: function () {
+			if(!Analyser.isinit) {
+				Analyser.init();
+			}
 			this.timeline.time(document.getElementById('audio').currentTime);
 			document.getElementById('audio').play();
 			this.timeline.play();

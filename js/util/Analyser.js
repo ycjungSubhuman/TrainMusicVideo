@@ -10,11 +10,12 @@
 			audioSrc.connect (this.analyser);
 			this.analyser.connect (ctx_audio.destination);
 			this.frequencyData = new Uint8Array (this.analyser.frequencyBinCount);
+			Analyser.isinit = true;
 		},
 		getFreqData: function () {
 			this.analyser.getByteFrequencyData(this.frequencyData);
 			return this.frequencyData;
-		}
+		},
+		isinit: false,
 	}
-	Analyser.init();
 }) (this);
